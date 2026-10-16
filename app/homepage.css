@@ -197,17 +197,34 @@
 .homepage .garden-invite p { font-size: 12px; line-height: 1.9; color: #69745f; }
 .homepage .garden-invite button { margin-left: auto; flex-shrink: 0; }
 
-.homepage .garden-scene > g[transform="translate(175 295) scale(0.85)"] { transform: translate(365px, 470px) scale(.85); }
-.homepage .garden-scene > g[transform="translate(827 300) scale(0.82)"] { transform: translate(745px, 470px) scale(.82); }
-.homepage .garden-scene > g[transform="translate(805 426)"] { transform: translate(865px, 426px); }
 .homepage .scene-clouds { animation: home-cloud-drift 32s ease-in-out infinite alternate; }
-.homepage .scene-canopy { animation: home-canopy-breeze 5s ease-in-out infinite; }
-.homepage .scene-flower { animation: home-flower-sway 3.8s ease-in-out infinite; }
-.homepage .scene-petals { animation: home-petal-drift 8s ease-in-out infinite; }
+.homepage .scene-canopy { transform-box: fill-box; transform-origin: center bottom; animation: home-canopy-breeze 8s ease-in-out infinite; }
+.homepage .scene-flower, .homepage .scene-grass {
+  transform-box: view-box;
+  transform-origin: 0 0;
+  animation: home-flower-sway var(--breeze-duration, 6s) ease-in-out var(--breeze-delay, 0s) infinite;
+}
+.homepage .scene-flower .flower-bloom {
+  transform-box: fill-box;
+  transform-origin: center bottom;
+  animation: home-bloom-nod var(--breeze-duration, 6s) ease-in-out var(--breeze-delay, 0s) infinite;
+}
+.homepage .scene-petal { animation: home-petal-drift var(--petal-duration, 14s) linear var(--petal-delay, 0s) infinite; }
+.homepage .scene-mote { animation: home-pollen-drift 7s ease-in-out infinite; }
+.homepage .butterfly svg { animation: home-butterfly-flutter .85s ease-in-out infinite; transform-origin: center; }
 @keyframes home-cloud-drift { from { translate: -8px 0; } to { translate: 18px 0; } }
-@keyframes home-canopy-breeze { 50% { translate: 0 -2px; } }
-@keyframes home-flower-sway { 50% { translate: 0 -2px; } }
-@keyframes home-petal-drift { 0%, 100% { translate: 0 0; opacity: .7; } 50% { translate: 5px 9px; opacity: 1; } }
+@keyframes home-canopy-breeze { 0%, 100% { rotate: -.35deg; } 50% { rotate: .55deg; } }
+@keyframes home-flower-sway { 0%, 100% { rotate: calc(var(--breeze-angle, 2deg) * -1); } 50% { rotate: var(--breeze-angle, 2deg); } }
+@keyframes home-bloom-nod { 0%, 100% { rotate: -1deg; } 55% { rotate: 2deg; } }
+@keyframes home-petal-drift {
+  0% { translate: -18px -35px; rotate: -20deg; opacity: 0; }
+  12% { opacity: .85; }
+  45% { translate: 12px 32px; rotate: 80deg; }
+  80% { opacity: .75; }
+  100% { translate: 53px 116px; rotate: 190deg; opacity: 0; }
+}
+@keyframes home-pollen-drift { 0%, 100% { translate: 0 6px; opacity: 0; } 40% { opacity: .8; } 80% { translate: 9px -17px; opacity: 0; } }
+@keyframes home-butterfly-flutter { 0%, 100% { scale: 1 1; } 50% { scale: .35 1; } }
 
 @media (hover: hover) {
   .homepage .primary:hover { background: #e9a7ba; box-shadow: 4px 5px 0 #9c6d81; }
@@ -327,13 +344,13 @@
 @keyframes meadow-bee-flap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.25); } }
 /* Let the SVG's aspect ratio set its height; a fixed-height slice crops tall blooms on wide screens. */
 .homepage .home-meadow > svg { display: block; width: 100%; height: auto; min-width: 1000px; position: relative; left: 50%; transform: translateX(-50%); image-rendering: pixelated; }
-.homepage .nature-sprigs { transform-origin: center bottom; animation: nature-sprig-breeze 6s ease-in-out infinite; }
+.homepage .nature-stem { transform-box: fill-box; transform-origin: center bottom; animation: nature-sprig-breeze 5.3s ease-in-out infinite; }
 .homepage .nature-vine-sway { transform-origin: top center; animation: nature-vine-breeze 7s ease-in-out infinite; }
 .homepage .nature-bee { animation: nature-bee-hover 4s ease-in-out infinite; }
 .homepage .how-patch-right .nature-bee,
 .homepage .hero-patch-right .nature-bee { animation-delay: -2s; }
 .homepage .hero-vine-right .nature-vine-sway { animation-delay: -3s; }
-@keyframes nature-sprig-breeze { 0%, 100% { rotate: -1deg; } 50% { rotate: 1deg; } }
+@keyframes nature-sprig-breeze { 0%, 100% { rotate: -2deg; } 50% { rotate: 2.5deg; } }
 @keyframes nature-vine-breeze { 0%, 100% { rotate: -1deg; } 50% { rotate: 1.5deg; } }
 @keyframes nature-bee-hover { 0%, 100% { translate: 0 0; } 50% { translate: 8px -7px; } }
 @media (max-width: 1000px) {
@@ -356,11 +373,22 @@
   .homepage .invite-vine { width: 58px; right: -10px; top: -20px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .homepage .nature-sprigs, .homepage .nature-vine-sway, .homepage .nature-bee { animation: none; }
+  .homepage .nature-stem, .homepage .nature-vine-sway, .homepage .nature-bee { animation: none; }
   .homepage .meadow-insect-flight { left: 28%; top: 18%; offset-path: none !important; transform: none; will-change: auto; }
   .homepage .meadow-bee-flight:nth-child(2) { left: 70%; top: 30%; }
   .homepage .meadow-butterfly-lavender { left: 44%; top: 8%; }
   .homepage .meadow-butterfly-peach { left: 84%; top: 22%; }
   .homepage .meadow-butterfly-wings { animation: none !important; }
   .homepage .meadow-bee-flight .nature-bee-body, .homepage .meadow-bee-flight .nature-bee-wing { animation: none !important; }
+}
+
+/* The insects stay in the illustrated garden, below the headline and actions. */
+.homepage .hero-insects { inset: auto 0 0; height: 200px; pointer-events: none; z-index: 0; }
+.homepage .hero-insects .meadow-insect-flight { width: 25px; }
+.homepage .hero-insects .meadow-butterfly-flight { width: 29px; }
+.homepage .refined-garden { image-rendering: pixelated; }
+@media (max-width: 700px) {
+  .homepage .hero-insects { height: 160px; }
+  .homepage .hero-insects .meadow-insect-flight { width: 22px; }
+  .homepage .hero-insects .meadow-butterfly-flight { width: 25px; }
 }

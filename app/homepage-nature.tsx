@@ -1,6 +1,6 @@
 'use client';
 
-import {useEffect, useRef} from 'react';
+import {useEffect, useRef, type CSSProperties} from 'react';
 import {FlowerPixels} from './pixel-art';
 
 function Fern({x, y, flip = false}: {x: number; y: number; flip?: boolean}) {
@@ -41,9 +41,9 @@ export function NaturePatch({className = '', variant = 'flowers'}: {className?: 
     <path d="M8 139h20v-5h39v5h56v-4h71v4h35v5H8z" fill="#dfe5c8"/>
     <Fern x={43} y={138}/><Fern x={197} y={139} flip/>
     <g className="nature-sprigs">
-      <g transform="translate(73 56) scale(1.7)"><FlowerPixels type={variant === 'flowers' ? 'daisy' : 'bluebell'}/></g>
-      <g transform="translate(125 80) scale(1.4)"><FlowerPixels type={variant === 'flowers' ? 'cosmos' : 'lavender'}/></g>
-      <g transform="translate(33 97)"><FlowerPixels type="daisy"/></g>
+      <g transform="translate(73 56) scale(1.7)"><g className="nature-stem"><FlowerPixels type={variant === 'flowers' ? 'daisy' : 'bluebell'}/></g></g>
+      <g transform="translate(125 80) scale(1.4)"><g className="nature-stem" style={{animationDelay: '-2.3s', animationDuration: '6.7s'}}><FlowerPixels type={variant === 'flowers' ? 'cosmos' : 'lavender'}/></g></g>
+      <g transform="translate(33 97)"><g className="nature-stem" style={{animationDelay: '-4.1s'}}><FlowerPixels type="daisy"/></g></g>
     </g>
     <Mushroom x={172} y={108}/><Mushroom x={207} y={120} small/>
     <path d="M61 141v-12h-4v-6h4v6h4v-10h3v12h4v-5h3v15zm91 0v-10h-4v-4h4v4h4v-8h3v18z" fill="#8ca56e"/>
@@ -71,7 +71,7 @@ export function MeadowBorder() {
     <svg viewBox="0 0 1200 104" preserveAspectRatio="xMidYMax meet" fill="none" shapeRendering="crispEdges" focusable="false">
       <path d="M0 93h80v-5h90v5h160v-4h120v4h140v-6h180v6h100v-4h150v4h180v11H0z" fill="#dce3c3"/>
       {Array.from({length: 25}, (_, i) => <g key={i} transform={`translate(${i * 51 - 8} ${i % 3 === 0 ? 32 : 53}) scale(${i % 3 === 0 ? 1.5 : 1})`}>
-        <FlowerPixels type={['daisy', 'lavender', 'cosmos', 'tulip', 'bluebell'][i % 5]}/>
+        <g className="nature-stem" style={{animationDelay: `${-i * .73}s`, animationDuration: `${4.8 + i % 4 * .7}s`} as CSSProperties}><FlowerPixels type={['daisy', 'lavender', 'cosmos', 'tulip', 'bluebell'][i % 5]}/></g>
       </g>)}
       {Array.from({length: 19}, (_, i) => <path key={i} d={`M${i * 67 + 18} 97v-13h-4v-6h4v6h4v-12h3v25h4v-8h4v8z`} fill={i % 2 ? '#a5b987' : '#b9c99c'}/>)}
       <Mushroom x={230} y={66} small/><Mushroom x={907} y={60}/>
@@ -80,7 +80,7 @@ export function MeadowBorder() {
   </div>;
 }
 
-function MeadowInsects() {
+export function MeadowInsects({className = ''}: {className?: string}) {
   const layerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -91,6 +91,7 @@ function MeadowInsects() {
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
     const animations: Animation[] = [];
     let disposed = false;
+    let inView = true;
     const random = (min: number, max: number) => min + Math.random() * (max - min);
 
     function stop() {
@@ -102,7 +103,7 @@ function MeadowInsects() {
     }
 
     function fly(bee: SVGSVGElement, index: number, firstPass: boolean) {
-      if (!layer || disposed || motion.matches) return;
+      if (!layer || disposed || motion.matches || !inView || document.hidden) return;
       const width = layer.clientWidth;
       const isButterfly = bee.classList.contains('meadow-butterfly-flight');
       const size = bee.getBoundingClientRect().width;
@@ -120,7 +121,7 @@ function MeadowInsects() {
             y: Math.max(0, Math.min(maxY, bloom.top + bloom.height / 2 - bounds.top - size * .8)),
           };
         })
-        .filter(flower => flower.x > size && flower.x < width - size * 2);
+        .filter(flower => flower.x > size && flower.x < width - size * 2 && flower.y > 0);
       const stops = [];
       const visitCount = Math.min(flowers.length, Math.floor(random(1, 4)));
       for (let visit = 0; visit < visitCount; visit++) {
@@ -131,7 +132,7 @@ function MeadowInsects() {
       const facing = `scaleX(${fromLeft ? 1 : -1})`;
 
       function play(frames: Keyframe[], options: KeyframeAnimationOptions, done: () => void) {
-        if (disposed || motion.matches) return;
+        if (disposed || motion.matches || !inView || document.hidden) return;
         const animation = bee.animate(frames, {...options, fill: 'both'});
         animations[index] = animation;
         animation.onfinish = () => {
@@ -175,23 +176,31 @@ function MeadowInsects() {
 
     function restart() {
       stop();
-      if (!motion.matches) bees.forEach((bee, index) => fly(bee, index, true));
+      if (!motion.matches && inView && !document.hidden) bees.forEach((bee, index) => fly(bee, index, true));
     }
 
     const resize = new ResizeObserver(restart);
+    const visibility = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      restart();
+    });
     resize.observe(layer);
+    visibility.observe(layer);
     motion.addEventListener('change', restart);
+    document.addEventListener('visibilitychange', restart);
     restart();
 
     return () => {
       disposed = true;
       stop();
       resize.disconnect();
+      visibility.disconnect();
       motion.removeEventListener('change', restart);
+      document.removeEventListener('visibilitychange', restart);
     };
   }, []);
 
-  return <div className="meadow-bees" ref={layerRef}>
+  return <div className={`meadow-bees ${className}`} ref={layerRef} aria-hidden="true">
     {[0, 1].map(index => <svg key={index} className="meadow-insect-flight meadow-bee-flight" viewBox="0 0 28 26" fill="none" shapeRendering="crispEdges" focusable="false">
       <Bee x={0} y={0}/>
     </svg>)}

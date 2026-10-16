@@ -1,6 +1,7 @@
-import {Butterfly, Flower, GardenScene} from './pixel-art';
+import {Butterfly, Flower} from './pixel-art';
+import {GardenScene} from './garden-scene';
 import {HomepageEvent} from './homepage-event';
-import {HangingVine, MeadowBorder, NaturePatch} from './homepage-nature';
+import {HangingVine, MeadowBorder, MeadowInsects, NaturePatch} from './homepage-nature';
 
 const steps = [
   {flower: 'tulip', title: 'Chọn một bông hoa', description: 'Mỗi bông hoa mang một câu chuyện. Hãy chọn đóa hoa dành riêng cho người ấy.'},
@@ -20,6 +21,7 @@ export function Homepage({onCreate, onGarden, onButterfly}: {
       <HangingVine className="hero-vine-right"/>
       <NaturePatch className="hero-patch-left" variant="woodland"/>
       <NaturePatch className="hero-patch-right"/>
+      <MeadowInsects className="hero-insects"/>
       <div className="hero-content">
         <div className="event-tag"><span className="tiny-flower" aria-hidden="true">✿</span> LTPC · CHÀO MỪNG NGÀY 20/10</div>
         <p className="hero-overline">a garden of little things</p>
