@@ -1,0 +1,25 @@
+import type {flowers} from './card-validation';
+
+type FlowerStory={fact:string;sentiment:string;source:string;publisher:string};
+
+// Botanical facts are separate from the original, suggested greeting sentiments.
+export const flowerStories:Record<typeof flowers[number],FlowerStory>={
+ tulip:{fact:'Tulip lớn lên từ củ, thường nở vào mùa xuân sau khi được trồng từ mùa thu.',sentiment:'Gửi một khởi đầu tươi sáng và những điều dịu dàng đang chờ phía trước.',source:'https://www.rhs.org.uk/plants/tulip/growing-guide',publisher:'RHS'},
+ rose:{fact:'Sau mùa hoa, nhiều cây hồng tạo quả gọi là rose hip; chim ăn quả cũng giúp phát tán hạt.',sentiment:'Dành cho người bạn luôn muốn trân trọng, cả trong những điều nhỏ nhất.',source:'https://www.kew.org/plants/roses',publisher:'Kew'},
+ sunflower:{fact:'Khi còn non, hướng dương có thể quay theo mặt trời. Khi trưởng thành, đầu hoa thường hướng về phía đông.',sentiment:'Mong bạn luôn tìm thấy ánh sáng và niềm vui trên hành trình của mình.',source:'https://www.phipps.conservatory.org/blog/detail/biopgh-blog-sunflowers',publisher:'Phipps Conservatory'},
+ cherry:{fact:'Ở Nhật Bản, việc cùng nhau ngắm hoa anh đào có tên là hanami — một truyền thống thưởng hoa mùa xuân.',sentiment:'Cảm ơn vì những khoảnh khắc đẹp mà chúng mình đã có cùng nhau.',source:'https://www.kew.org/read-and-watch/spring-flowers-kew-gardens-bluebell-blossom-magnolia',publisher:'Kew'},
+ lavender:{fact:'Hoa oải hương thu hút ong và nhiều côn trùng thụ phấn, mang sự sống đến cả những góc vườn nhỏ.',sentiment:'Gửi bạn một khoảng bình yên, để nghỉ ngơi và được là chính mình.',source:'https://www.rhs.org.uk/plants/lavender/growing-guide',publisher:'RHS'},
+ daisy:{fact:'Một bông cúc thực ra là nhiều hoa nhỏ tụ lại thành một cụm, trông như một bông hoa duy nhất.',sentiment:'Những điều nhỏ bé, khi ở bên nhau, có thể tạo nên thật nhiều yêu thương.',source:'https://www.kew.org/read-and-watch/lets-pluck-the-daisy',publisher:'Kew'},
+ lily:{fact:'Hoa ly lớn lên từ củ. Tùy loại, hoa có thể có dáng chiếc kèn hoặc những cánh cong ngược về sau.',sentiment:'Một lời cảm ơn dành cho sự dịu dàng và chu đáo bạn luôn trao đi.',source:'https://www.rhs.org.uk/plants/lilies',publisher:'RHS'},
+ lotus:{fact:'Bề mặt lá sen đẩy nước rất tốt. Đặc tính này đã gợi nên tên gọi “hiệu ứng lá sen”.',sentiment:'Mong bạn luôn vững vàng và giữ được vẻ đẹp riêng giữa những ngày khó khăn.',source:'https://powo.science.kew.org/taxon/urn%3Alsid%3Aipni.org%3Anames%3A605422-1/general-information',publisher:'Kew'},
+ orchid:{fact:'Ở nhiều loài lan, không chỉ lá mà cả rễ khí sinh cũng có thể quang hợp.',sentiment:'Bạn có cách tỏa sáng của riêng mình, kể cả ở những nơi ít ai nhìn thấy.',source:'https://www.rhs.org.uk/plants/types/houseplants/orchid-facts',publisher:'RHS'},
+ hydrangea:{fact:'Một số giống cẩm tú cầu đổi giữa sắc xanh và hồng tùy độ chua của đất và lượng nhôm cây hấp thụ được.',sentiment:'Dù cuộc sống đổi màu thế nào, mong bạn vẫn được yêu thương trọn vẹn.',source:'https://www.rhs.org.uk/plants/hydrangea/shrubby/growing-guide',publisher:'RHS'},
+ peony:{fact:'Mẫu đơn có thể sống qua nhiều thập kỷ; khi có điều kiện phù hợp, một cây thậm chí có thể sống hơn một thế kỷ.',sentiment:'Gửi một lời chúc gắn bó bền lâu, qua thật nhiều mùa hoa nữa.',source:'https://extension.missouri.edu/news/peonies-thrive-on-neglect-can-live-more-than-100-years',publisher:'University of Missouri'},
+ cosmos:{fact:'Hoa cánh bướm thuộc họ Cúc (Asteraceae), cùng họ với hướng dương và nhiều loài cúc quen thuộc.',sentiment:'Mong những niềm vui giản dị sẽ ghé thăm bạn mỗi ngày.',source:'https://www.rhs.org.uk/plants/30717/cosmos-bipinnatus/details',publisher:'RHS'},
+ iris:{fact:'Diên vĩ có nhiều nhóm khác nhau; một số loài phát triển từ thân rễ nằm sát mặt đất.',sentiment:'Mong bạn luôn can đảm bước tiếp và tìm thấy vẻ đẹp theo cách của riêng mình.',source:'https://www.rhs.org.uk/plants/iris',publisher:'RHS'},
+ daffodil:{fact:'Thủy tiên thường được trồng từ củ vào mùa thu để nở hoa vào mùa xuân.',sentiment:'Chúc bạn đón một khởi đầu mới thật tươi sáng và đầy hy vọng.',source:'https://www.rhs.org.uk/plants/daffodils/growing-guide',publisher:'RHS'},
+ poppy:{fact:'Anh túc có những cánh hoa mỏng nhẹ và thường rụng nhanh sau khi nở.',sentiment:'Mong bạn biết nâng niu những khoảnh khắc đẹp đang có.',source:'https://www.rhs.org.uk/plants/poppies',publisher:'RHS'},
+ marigold:{fact:'Vạn thọ có nhiều giống với sắc hoa vàng hoặc cam, thường được trồng trong vườn mùa hè.',sentiment:'Mong ngày của bạn luôn ngập tràn năng lượng ấm áp và vui tươi.',source:'https://www.rhs.org.uk/plants/marigolds',publisher:'RHS'},
+ hibiscus:{fact:'Dâm bụt có những bông hoa lớn, nổi bật; nhiều giống được trồng làm cây cảnh ở vùng khí hậu ấm.',sentiment:'Chúc bạn luôn tự tin khoe sắc và tỏa sáng theo cách rất riêng.',source:'https://www.rhs.org.uk/plants/hibiscus',publisher:'RHS'},
+ bluebell:{fact:'Chuông xanh thường nở vào mùa xuân và tạo thành những thảm hoa dưới tán cây.',sentiment:'Cảm ơn bạn đã mang đến sự dịu dàng và bình yên cho mọi người xung quanh.',source:'https://www.rhs.org.uk/plants/bluebells',publisher:'RHS'},
+};

@@ -1,0 +1,46 @@
+/* Give each greeting enough room for its flower and surrounding decorations. */
+.flower-field{grid-template-columns:repeat(5,minmax(0,1fr));gap:25px 18px;padding:28px 22px 40px}
+.garden-flower{gap:6px;padding:5px 0 9px}
+.garden-flower>.card-art-small{width:168px;max-width:100%;height:auto}
+.garden-flower>span{font-size:10px;padding:3px 9px}
+.community .flower-field{display:block;position:relative;z-index:1;width:100%;min-width:0;height:650px;margin-inline:auto;padding:0}
+.community .garden-flower{position:absolute;transform:translate(-50%,-100%);width:clamp(96px,22vw,220px);margin:0;gap:1px;overflow:visible}
+.community .garden-flower::before,.community .garden-flower::after{content:"";position:absolute;left:50%;top:31%;width:4px;height:4px;z-index:2;pointer-events:none;opacity:0;image-rendering:pixelated}
+.community .garden-flower::before{background:#fff0a6;box-shadow:-43px -14px #fff0a6,-30px 9px #f5d77a,-19px -29px #fff8d5,22px -25px #fff0a6,39px -7px #f5d77a,31px 14px #fff8d5,9px -37px #f5d77a,-8px 22px #fff0a6;animation-delay:-.25s}
+.community .garden-flower::after{width:3px;height:3px;background:#f5c8d9;box-shadow:-34px -23px #f5c8d9,-25px 17px #fff8d5,-11px -35px #f5c8d9,17px -32px #fff8d5,35px -19px #f5c8d9,43px 8px #fff8d5,20px 23px #f5c8d9,0 -43px #fff0a6;animation-delay:-.7s}
+.community .garden-flower:hover:has(.garden-flower-main:hover),.community .garden-flower:focus-visible{z-index:4}
+.community .garden-flower:hover:has(.garden-flower-main:hover)::before,.community .garden-flower:hover:has(.garden-flower-main:hover)::after,.community .garden-flower:focus-visible::before,.community .garden-flower:focus-visible::after{animation:flower-hover-pixels 1.5s steps(4,end) infinite}
+.community .garden-flower:hover:has(.garden-flower-main:hover)>.card-art-small,.community .garden-flower:focus-visible>.card-art-small{filter:drop-shadow(0 0 6px #ffe68acc)}
+.community .garden-flower:focus-visible{z-index:4}
+@keyframes flower-hover-pixels{0%,100%{opacity:0;transform:translate(-50%,5px) scale(.7)}25%,75%{opacity:1}50%{opacity:.65;transform:translate(-50%,-5px) scale(1)}}
+@media(prefers-reduced-motion:reduce){.community .garden-flower:hover::before,.community .garden-flower:hover::after,.community .garden-flower:focus-visible::before,.community .garden-flower:focus-visible::after{animation:none;opacity:0}}
+.community-field{isolation:isolate;overflow:hidden;border-top:0;background-color:#9bc77c;background-image:url('/grass-pixels.svg'),linear-gradient(#9bc77c,#9bc77c);background-position:0 0,0 0;background-size:96px 96px,100% 100%;background-repeat:repeat,no-repeat;animation:grass-pixels-shake 1.2s steps(2,end) infinite}
+@keyframes grass-pixels-shake{0%,100%{background-position:0 0,0 0}50%{background-position:0 -1px,0 0}}
+@media(prefers-reduced-motion:reduce){.community-field{animation:none}}
+.garden-placement{margin-top:20px}
+.garden-placement h4{font-size:12px;margin:0 0 8px}
+.garden-placement>p{font-size:10px;line-height:1.8}
+.plant-map{display:block;width:100%;aspect-ratio:760/650;position:relative;overflow:hidden;padding:0;border:2px solid #9eaf85;background-color:#d1ddb4;background-image:repeating-linear-gradient(90deg,transparent 0 32px,#bccc9c44 32px 34px);touch-action:none;cursor:crosshair}
+.map-sky{position:absolute;top:0;left:0;right:0;height:6%;background:#edf0d9;border-bottom:5px solid #bdcca3}
+.plant-marker{position:absolute;width:22.1%;transform:translate(-50%,-100%);pointer-events:none;display:block}
+.plant-marker>.card-art{width:100%;height:auto}
+.neighbor-marker{opacity:.5}
+.chosen-marker{z-index:2;filter:drop-shadow(0 2px 0 #fff7dd)}
+.chosen-label{display:block;font-size:9px;line-height:1.6;background:#fff3d9;color:#7f674a;white-space:nowrap;width:max-content;max-width:130%;padding:2px 6px;margin:0 auto;border:1px solid #b9a477}
+.map-prompt{position:absolute;left:10%;right:10%;top:48%;font-size:11px;color:#6d825c;background:#f7f4decc;padding:10px}
+.placement-status{color:#6b8054!important;margin:9px 0 4px}
+.placement-note{font-size:9px!important;color:#908276!important;margin:4px 0 0}
+.community .garden-flower>.card-art-small{width:100%;height:auto}
+@media(max-width:1000px) and (min-width:701px){.flower-field{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:700px){.flower-field{grid-template-columns:repeat(2,minmax(0,1fr));gap:20px 12px;padding:22px 12px 32px}.garden-flower>.card-art-small{width:152px}.garden-flower>span{font-size:10px}.community .garden-flower>span{font-size:8px;padding:2px 5px}}
+.community.page-wrap{position:relative;isolation:isolate;overflow:hidden;width:100%;max-width:none;height:calc(100svh - 92px);min-height:0;margin:0;padding:0}
+.community .section-heading{position:absolute;z-index:3;top:28px;left:50%;width:min(520px,calc(100% - 36px));margin:0;padding:13px 24px 15px;transform:translateX(-50%);background:#f6e8c8;border:4px solid #765b42;outline:3px solid #d6bd8b;outline-offset:-10px;box-shadow:4px 5px 0 #4f5942;text-align:center;pointer-events:none}
+.community .section-heading::before{content:"";position:absolute;z-index:-1;left:0;right:0;height:30px;top:-30px;background:linear-gradient(90deg,transparent 0 21%,#765b42 21% 22%,#c9ad78 22% 23%,transparent 23% 77%,#c9ad78 77% 78%,#765b42 78% 79%,transparent 79%);image-rendering:pixelated}
+.community .section-heading .eyebrow{margin-bottom:6px;color:#738454;font-size:7px;letter-spacing:1.4px}
+.community .section-heading h1{font-size:22px;line-height:1.45;margin:0;color:#544652}
+.community .section-heading p{margin:3px 0 0;color:#776975;font-size:10px;line-height:1.6}
+.community .community-field{position:absolute;z-index:0;inset:0;width:100%;height:100%;min-height:0;border:0;box-shadow:none}
+.community .flower-field{height:100%}
+.community .empty-garden{position:absolute;top:50%;left:50%;width:min(100%,500px);transform:translate(-50%,-50%);padding:20px}
+.community>.privacy-note{position:absolute;z-index:4;left:0;right:0;bottom:4px;margin:0;font-size:9px}
+@media(max-width:700px){.community.page-wrap{height:calc(100svh - 112px)}.community .section-heading{top:24px;width:calc(100% - 32px);padding:11px 12px 12px}.community .section-heading .eyebrow{font-size:6px;letter-spacing:1px}.community .section-heading h1{font-size:18px;line-height:1.5}.community .section-heading p{font-size:8px;line-height:1.6}.community>.privacy-note{font-size:8px}}

@@ -1,0 +1,366 @@
+/* Home-page styling stays scoped so the card editor keeps its own layout. */
+.homepage {
+  --home-ink: #554451;
+  --home-muted: #78666f;
+  --home-border: #e4d7c8;
+  --home-width: 1100px;
+}
+
+.homepage .hero {
+  height: auto;
+  min-height: 770px;
+  padding: 42px 24px 218px;
+  isolation: isolate;
+  background: #fbefdf;
+  border-bottom: 6px solid #a6bc8b;
+}
+
+.homepage .hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 41% 66% at 50% 23%, #fff9edf5 25%, #fff9edb8 62%, #fff9ed00 100%);
+}
+
+.homepage .hero-content {
+  position: relative;
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: none;
+  box-shadow: none;
+  backdrop-filter: none;
+}
+
+.homepage .event-tag {
+  gap: 10px;
+  padding: 7px 16px;
+  border-color: #dbc1be;
+  background: #fff9edf0;
+  box-shadow: 3px 3px 0 #ead6c866;
+  color: #79616b;
+  font-size: 10px;
+  letter-spacing: 1.4px;
+}
+
+.homepage .hero-overline {
+  margin: 29px 0 20px;
+  color: #8c737c;
+  font-size: 8px;
+  line-height: 1.8;
+}
+
+.homepage .hero h1 {
+  width: fit-content;
+  margin: 0 auto 24px;
+  font-size: clamp(44px, 5.2vw, 68px);
+  line-height: 1.28;
+  letter-spacing: -3px;
+  color: #614c5d;
+  text-shadow: 4px 4px 0 #e6c4c1;
+}
+
+.homepage .hero h1 span { color: #a16b84; }
+.homepage .hero h1 i { top: 6px; right: -39px; margin: 0; font-size: 25px; }
+.homepage .hero-subtitle { margin-bottom: 12px; color: #65515e; font-size: clamp(19px, 2vw, 24px); font-weight: 600; letter-spacing: -.6px; }
+.homepage .mobile-break { display: none; }
+.homepage .hero-description { margin-bottom: 0; color: var(--home-muted); font-size: 13px; line-height: 1.9; }
+.homepage .hero-actions { gap: 16px; margin-top: 26px; }
+.homepage .hero-actions .pixel-button { min-height: 52px; padding: 12px 23px; font-size: 13px; }
+.homepage .primary { background: #edb3c3; border-color: #9c6d81; box-shadow: 3px 3px 0 #9c6d81; }
+.homepage .secondary { background: #fffaf0; }
+.homepage .hero-note { margin: 19px auto 0; color: #79696c; font-size: 10px; letter-spacing: 0; }
+.homepage .hero-note > span { margin-right: 5px; color: #a66d85; font-size: 15px; }
+.homepage .butterfly { top: 37%; left: max(6%, calc(50% - 450px)); width: 48px; min-height: 44px; }
+.homepage .garden-caption { bottom: 77px; max-width: calc(100% - 36px); padding: 8px 15px; color: #536b4a; background: #fffaedf2; font-size: 10px; text-align: center; }
+.homepage .scroll-cue { bottom: 20px; padding: 6px 12px; font-size: 8px; color: #42593b; font-weight: 600; }
+.homepage .scroll-cue span { margin-top: 8px; }
+
+.homepage .how {
+  padding: 80px 28px 74px;
+  background: #fff9ed;
+  scroll-margin-top: 20px;
+}
+
+.homepage .section-heading { max-width: 680px; margin: 0 auto 38px; }
+.homepage .eyebrow { color: #886674; font-size: 10px; letter-spacing: 1.7px; line-height: 1.8; }
+.homepage .section-heading .eyebrow { color: #667955; margin-bottom: 12px; }
+.homepage .section-heading h2 { margin-bottom: 12px; font-size: clamp(25px, 3vw, 34px); line-height: 1.4; color: var(--home-ink); }
+.homepage .section-heading p { margin: 0; font-size: 13px; color: var(--home-muted); }
+
+.homepage .steps-intro {
+  max-width: var(--home-width);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 24px;
+  padding: 0;
+  margin: 0 auto;
+  list-style: none;
+  text-align: left;
+}
+
+.homepage .intro-item {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-width: 0;
+  padding: 23px 26px 28px;
+  border: 1px solid var(--home-border);
+  background: #fffcf5;
+  box-shadow: 4px 4px 0 #ede3d5;
+}
+
+.homepage .intro-topline { display: flex; align-items: center; justify-content: space-between; width: 100%; color: #ad9994; }
+.homepage .intro-number { color: #997684; font: 10px/1.8 'Press Start 2P', monospace; }
+.homepage .intro-art { width: 78px; height: 84px; margin: 21px 0 23px; border: 0; background: #f7e9e8; }
+.homepage .intro-item:nth-child(2) .intro-art { background: #f1eaf1; }
+.homepage .intro-item:nth-child(3) .intro-art { background: #f5efd9; }
+.homepage .intro-art .flower { width: 46px; height: 58px; }
+.homepage .intro-item h3 { margin-bottom: 9px; font-size: 16px; line-height: 1.55; color: var(--home-ink); }
+.homepage .intro-item p { margin: 0; font-size: 12px; line-height: 1.9; color: var(--home-muted); }
+.homepage .how > .text-link { display: inline-flex; align-items: center; gap: 16px; margin-top: 28px; min-height: 44px; color: #925d74; font-size: 12px; }
+
+.homepage .event-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1.25fr) minmax(250px, .75fr);
+  align-items: center;
+  gap: clamp(36px, 6vw, 88px);
+  max-width: var(--home-width);
+  width: calc(100% - 56px);
+  margin: 0 auto 64px;
+  padding: clamp(32px, 5vw, 64px);
+  border: 1px solid var(--home-border);
+  background: #f6eee4;
+  box-shadow: 5px 5px 0 #e9dfd3;
+  scroll-margin-top: 32px;
+}
+
+.homepage .event-story { min-width: 0; }
+.homepage .event-story > .eyebrow { margin-bottom: 17px; }
+.homepage .event-story h2 { margin-bottom: 22px; color: var(--home-ink); font-size: clamp(26px, 3vw, 35px); line-height: 1.45; letter-spacing: -.9px; text-wrap: balance; }
+.homepage .event-story p { color: var(--home-muted); font-size: 13px; line-height: 1.95; }
+.homepage .event-story strong { color: #624f5b; }
+.homepage .event-story blockquote { margin: 24px 0; padding: 4px 0 4px 17px; border-left: 3px solid #c58a9f; color: #8c5b73; font: 9px/2.2 'Press Start 2P', monospace; }
+.homepage .event-story .pixel-button { margin-top: 8px; }
+
+.homepage .event-date-card {
+  position: relative;
+  display: flex;
+  min-height: 350px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 27px 22px 22px;
+  border: 1px solid #c9a4ad;
+  outline: 1px solid #d8bfc1;
+  outline-offset: 7px;
+  background: #fff9ed;
+  box-shadow: 10px 10px 0 #e5d4ca;
+  color: #66515f;
+  text-align: center;
+  transform: rotate(2deg);
+}
+
+.homepage .event-date-card::before { content: ''; position: absolute; top: -19px; left: calc(50% - 36px); width: 72px; height: 28px; background: #d6b8b3a3; transform: rotate(-7deg); border: 1px solid #ccb1aa44; }
+.homepage .event-card-top, .homepage .event-card-bottom { display: flex; width: 100%; align-items: center; justify-content: space-between; gap: 8px; color: #806974; font-size: 8px; letter-spacing: .7px; }
+.homepage .event-card-top .flower { width: 24px; height: 30px; }
+.homepage .event-date-number { margin-top: 26px; color: #75566d; font: clamp(80px, 8vw, 105px)/1 'Press Start 2P', monospace; letter-spacing: -9px; text-shadow: 5px 5px 0 #efd0d2; }
+.homepage .event-date-month { margin-top: 22px; color: #8c5b73; font-size: 11px; font-weight: 600; letter-spacing: 2px; }
+.homepage .event-date-month span { margin-left: 5px; color: #ad823d; }
+.homepage .event-date-year { margin-top: 5px; color: #806974; font-size: 13px; letter-spacing: 5px; }
+.homepage .event-card-rule { width: 80%; height: 1px; margin: 26px 0 20px; background: #e0d0c3; }
+
+.homepage .garden-invite {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: calc(100% - 56px);
+  max-width: var(--home-width);
+  margin: 0 auto 72px;
+  padding: 36px 40px;
+  border: 1px solid #c8d1b5;
+  border-left: 4px solid #9eaf88;
+  background: #eff1e2;
+  box-shadow: 4px 4px 0 #e1e3d0;
+}
+.homepage .invite-bouquet { display: flex; width: 122px; flex-shrink: 0; align-items: flex-end; justify-content: center; }
+.homepage .invite-bouquet .flower { width: 44px; height: 61px; }
+.homepage .invite-bouquet .flower:first-child { transform: rotate(-13deg) translateX(6px); }
+.homepage .invite-bouquet .flower:nth-child(2) { height: 87px; }
+.homepage .invite-bouquet .flower:last-child { transform: rotate(13deg) translateX(-6px); }
+.homepage .invite-copy { min-width: 0; }
+.homepage .garden-invite .eyebrow { color: #61754e; margin-bottom: 8px; }
+.homepage .garden-invite h2 { margin-bottom: 10px; font-size: 24px; line-height: 1.45; letter-spacing: -.6px; }
+.homepage .garden-invite p { font-size: 12px; line-height: 1.9; color: #69745f; }
+.homepage .garden-invite button { margin-left: auto; flex-shrink: 0; }
+
+.homepage .garden-scene > g[transform="translate(175 295) scale(0.85)"] { transform: translate(365px, 470px) scale(.85); }
+.homepage .garden-scene > g[transform="translate(827 300) scale(0.82)"] { transform: translate(745px, 470px) scale(.82); }
+.homepage .garden-scene > g[transform="translate(805 426)"] { transform: translate(865px, 426px); }
+.homepage .scene-clouds { animation: home-cloud-drift 32s ease-in-out infinite alternate; }
+.homepage .scene-canopy { animation: home-canopy-breeze 5s ease-in-out infinite; }
+.homepage .scene-flower { animation: home-flower-sway 3.8s ease-in-out infinite; }
+.homepage .scene-petals { animation: home-petal-drift 8s ease-in-out infinite; }
+@keyframes home-cloud-drift { from { translate: -8px 0; } to { translate: 18px 0; } }
+@keyframes home-canopy-breeze { 50% { translate: 0 -2px; } }
+@keyframes home-flower-sway { 50% { translate: 0 -2px; } }
+@keyframes home-petal-drift { 0%, 100% { translate: 0 0; opacity: .7; } 50% { translate: 5px 9px; opacity: 1; } }
+
+@media (hover: hover) {
+  .homepage .primary:hover { background: #e9a7ba; box-shadow: 4px 5px 0 #9c6d81; }
+  .homepage .secondary:hover { background: #fffdf7; }
+  .homepage .butterfly:hover { filter: brightness(1.12); }
+}
+
+@media (max-width: 900px) {
+  .homepage .hero { min-height: 740px; padding-top: 36px; }
+  .homepage .hero h1 { font-size: 52px; }
+  .homepage .steps-intro { gap: 16px; }
+  .homepage .intro-item { padding: 20px; }
+  .homepage .intro-item h3 { font-size: 14px; }
+  .homepage .event-section { gap: 35px; padding: 36px; }
+  .homepage .event-story h2 { font-size: 27px; }
+  .homepage .event-date-card { min-height: 320px; padding: 22px 16px; }
+  .homepage .event-date-number { font-size: 82px; }
+  .homepage .garden-invite { gap: 22px; padding: 30px; flex-wrap: wrap; }
+  .homepage .invite-bouquet { width: 100px; }
+  .homepage .garden-invite button { margin-left: 122px; }
+}
+
+@media (max-width: 700px) {
+  .homepage .hero { min-height: 750px; max-height: none; padding: 31px 22px 210px; }
+  .homepage .hero::before { background: linear-gradient(180deg, #fff9edc9, #fff9edb8 49%, #fff9ed00 78%); }
+  .homepage .hero-content { width: 100%; margin: 0; padding: 0; }
+  .homepage .event-tag { font-size: 8px; gap: 8px; letter-spacing: .9px; padding: 6px 12px; }
+  .homepage .hero-overline { margin: 29px 0 22px; font-size: 7px; letter-spacing: .5px; }
+  .homepage .hero h1 { font-size: clamp(32px, 8.3vw, 48px); letter-spacing: -2px; margin-bottom: 24px; line-height: 1.4; text-shadow: 3px 3px 0 #e6c4c1; }
+  .homepage .hero h1 i { right: -24px; top: 2px; font-size: 17px; }
+  .homepage .hero-subtitle { font-size: 20px; line-height: 1.5; }
+  .homepage .hero-description { max-width: 360px; margin: 0 auto; font-size: 12px; }
+  .homepage .hero-actions { max-width: 350px; margin: 25px auto 0; flex-direction: column; gap: 12px; }
+  .homepage .hero-actions .pixel-button { width: 100%; min-height: 50px; font-size: 12px; }
+  .homepage .hero-note { max-width: 290px; margin-top: 18px; font-size: 9px; line-height: 1.8; }
+  .homepage .butterfly { top: auto; bottom: 142px; left: 12%; width: 42px; }
+  .homepage .garden-caption { bottom: 73px; width: max-content; max-width: calc(100% - 36px); white-space: normal; font-size: 8px; padding: 8px 10px; }
+  .homepage .scroll-cue { font-size: 7px; }
+  .homepage .how { padding: 54px 22px 48px; }
+  .homepage .section-heading { margin-bottom: 28px; }
+  .homepage .section-heading .eyebrow { font-size: 8px; letter-spacing: 1.1px; }
+  .homepage .section-heading h2 { font-size: 24px; letter-spacing: -.7px; text-wrap: balance; }
+  .homepage .section-heading p { font-size: 12px; }
+  .homepage .steps-intro { grid-template-columns: 1fr; max-width: 460px; gap: 17px; }
+  .homepage .intro-item { display: grid; grid-template-columns: 68px minmax(0, 1fr); gap: 12px 18px; padding: 19px; }
+  .homepage .intro-topline { grid-column: 1 / -1; }
+  .homepage .intro-art { grid-row: auto; width: 68px; height: 78px; margin: 0; align-self: start; }
+  .homepage .intro-copy { min-width: 0; }
+  .homepage .intro-item h3 { margin-bottom: 6px; font-size: 14px; }
+  .homepage .intro-item p { font-size: 11px; line-height: 1.85; }
+  .homepage .event-section { grid-template-columns: 1fr; gap: 48px; width: calc(100% - 44px); margin-bottom: 38px; padding: 33px 23px 40px; }
+  .homepage .event-story h2 { font-size: 26px; }
+  .homepage .event-story p { font-size: 12px; }
+  .homepage .event-story blockquote { font-size: 8px; padding-left: 12px; }
+  .homepage .event-story .pixel-button { width: 100%; font-size: 11px; gap: 10px; padding: 11px 10px; }
+  .homepage .event-date-card { width: min(100%, 280px); justify-self: center; min-height: 305px; }
+  .homepage .garden-invite { display: grid; grid-template-columns: 1fr; width: calc(100% - 44px); margin-bottom: 45px; padding: 28px 24px; gap: 20px; text-align: center; }
+  .homepage .invite-bouquet { width: 122px; margin: auto; }
+  .homepage .garden-invite h2 { font-size: 23px; }
+  .homepage .garden-invite button { margin: 0; width: 100%; white-space: normal; }
+}
+
+@media (max-width: 380px) {
+  .homepage .hero { padding-inline: 18px; }
+  .homepage .mobile-break { display: initial; }
+  .homepage .hero-subtitle { font-size: 19px; }
+  .homepage .event-tag { font-size: 7px; }
+  .homepage .intro-item { gap: 12px; padding: 16px; grid-template-columns: 54px minmax(0, 1fr); }
+  .homepage .intro-art { width: 54px; height: 68px; }
+  .homepage .event-section { padding-inline: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .homepage .scene-clouds, .homepage .scene-canopy, .homepage .scene-flower, .homepage .scene-petals, .homepage .butterfly { animation: none; }
+}
+
+/* Pixel greenery frames the content without covering interactive elements. */
+.homepage { overflow: clip; }
+.homepage .how,
+.homepage .event-section,
+.homepage .garden-invite { position: relative; }
+.homepage .nature-decoration {
+  position: absolute;
+  display: block;
+  pointer-events: none;
+  user-select: none;
+  image-rendering: pixelated;
+}
+.homepage .nature-patch { width: 210px; height: auto; }
+.homepage .nature-vine { width: 112px; height: auto; }
+.homepage .hero-vine-left { top: -7px; left: 18px; }
+.homepage .hero-vine-right { top: -24px; right: 18px; transform: scaleX(-1); width: 140px; }
+.homepage .hero-patch-left { bottom: 15px; left: 28px; width: 240px; }
+.homepage .hero-patch-right { bottom: 10px; right: 24px; width: 250px; }
+.homepage .how { padding-top: 102px; }
+.homepage .how-patch-left { top: 12px; left: max(20px, calc(50% - 560px)); width: 164px; }
+.homepage .how-patch-right { top: 12px; right: max(20px, calc(50% - 560px)); width: 164px; }
+.homepage .event-vine { top: -35px; right: -26px; transform: scaleX(-1); width: 102px; }
+.homepage .event-patch { bottom: -29px; left: -27px; width: 115px; }
+.homepage .invite-vine { top: -26px; right: -18px; transform: scaleX(-1); width: 70px; }
+.homepage .garden-invite { margin-bottom: 30px; }
+.homepage .home-meadow { position: relative; overflow: hidden; pointer-events: none; user-select: none; }
+.homepage .meadow-bees { position: absolute; inset: 0; overflow: hidden; }
+.homepage .meadow-insect-flight { position: absolute; top: 0; left: 0; width: clamp(24px, 2.4vw, 36px); height: auto; offset-anchor: 0 0; offset-position: 0 0; offset-rotate: 0deg; transform: translateX(-200%); will-change: offset-distance; }
+.homepage .meadow-butterfly-flight { width: clamp(26px, 2.7vw, 38px); }
+.homepage .meadow-butterfly-wings { transform-box: view-box; transform-origin: 50% 50%; animation: meadow-butterfly-flutter .6s ease-in-out infinite; }
+.homepage .meadow-butterfly-peach .meadow-butterfly-wings { animation-duration: .73s; animation-delay: -.3s; }
+.homepage .meadow-butterfly-flight[data-pollinating=true] .meadow-butterfly-wings { animation-duration: 1.3s; }
+@keyframes meadow-butterfly-flutter { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.18); } }
+.homepage .meadow-bee-flight .nature-bee { animation: none; }
+.homepage .meadow-bee-flight { overflow: visible; }
+.homepage .meadow-bee-flight .nature-bee-wing { transform-box: fill-box; transform-origin: bottom center; animation: meadow-bee-flap .16s steps(2, end) infinite; }
+.homepage .meadow-bee-flight[data-pollinating=true] .nature-bee-wing { animation-duration: .38s; }
+.homepage .meadow-bee-flight[data-pollinating=true] .nature-bee-body { transform-box: fill-box; transform-origin: right center; animation: meadow-bee-nectar .65s steps(3, end) infinite; }
+/* Match the garden bees' stepped nectar-gathering shake. */
+@keyframes meadow-bee-nectar { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(12deg); } }
+@keyframes meadow-bee-flap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.25); } }
+/* Let the SVG's aspect ratio set its height; a fixed-height slice crops tall blooms on wide screens. */
+.homepage .home-meadow > svg { display: block; width: 100%; height: auto; min-width: 1000px; position: relative; left: 50%; transform: translateX(-50%); image-rendering: pixelated; }
+.homepage .nature-sprigs { transform-origin: center bottom; animation: nature-sprig-breeze 6s ease-in-out infinite; }
+.homepage .nature-vine-sway { transform-origin: top center; animation: nature-vine-breeze 7s ease-in-out infinite; }
+.homepage .nature-bee { animation: nature-bee-hover 4s ease-in-out infinite; }
+.homepage .how-patch-right .nature-bee,
+.homepage .hero-patch-right .nature-bee { animation-delay: -2s; }
+.homepage .hero-vine-right .nature-vine-sway { animation-delay: -3s; }
+@keyframes nature-sprig-breeze { 0%, 100% { rotate: -1deg; } 50% { rotate: 1deg; } }
+@keyframes nature-vine-breeze { 0%, 100% { rotate: -1deg; } 50% { rotate: 1.5deg; } }
+@keyframes nature-bee-hover { 0%, 100% { translate: 0 0; } 50% { translate: 8px -7px; } }
+@media (max-width: 1000px) {
+  .homepage .hero-vine-left { width: 86px; left: 5px; }
+  .homepage .hero-vine-right { width: 100px; right: 5px; }
+  .homepage .hero-patch-left, .homepage .hero-patch-right { width: 175px; }
+  .homepage .how-patch-left, .homepage .how-patch-right { width: 120px; top: 6px; }
+}
+@media (max-width: 700px) {
+  .homepage .hero-vine-left { width: 51px; top: -13px; left: -7px; }
+  .homepage .hero-vine-right { width: 56px; top: -14px; right: -6px; }
+  .homepage .hero-patch-left { width: 111px; left: -19px; bottom: 4px; }
+  .homepage .hero-patch-right { width: 118px; right: -20px; bottom: 5px; }
+  .homepage .how { padding-top: 104px; }
+  .homepage .how-patch-left, .homepage .how-patch-right { width: 104px; top: 13px; }
+  .homepage .how-patch-left { left: 21px; }
+  .homepage .how-patch-right { right: 21px; }
+  .homepage .event-vine { width: 48px; right: -12px; top: -26px; }
+  .homepage .event-patch { width: 98px; left: -18px; bottom: -28px; }
+  .homepage .invite-vine { width: 58px; right: -10px; top: -20px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .homepage .nature-sprigs, .homepage .nature-vine-sway, .homepage .nature-bee { animation: none; }
+  .homepage .meadow-insect-flight { left: 28%; top: 18%; offset-path: none !important; transform: none; will-change: auto; }
+  .homepage .meadow-bee-flight:nth-child(2) { left: 70%; top: 30%; }
+  .homepage .meadow-butterfly-lavender { left: 44%; top: 8%; }
+  .homepage .meadow-butterfly-peach { left: 84%; top: 22%; }
+  .homepage .meadow-butterfly-wings { animation: none !important; }
+  .homepage .meadow-bee-flight .nature-bee-body, .homepage .meadow-bee-flight .nature-bee-wing { animation: none !important; }
+}

@@ -1,0 +1,18 @@
+.greeting.illustrated-letter{padding:90px 22px 110px;isolation:isolate;background:#dcecf0;border-color:#8f9b83}
+.illustrated-letter.theme-blossom{background:#f8e3ec;border-color:#b18e9f}
+.illustrated-letter.theme-night{background:#2f304c;border-color:#7c7697}
+.illustrated-letter:before{inset:8px;z-index:3;border-color:#fff6e8;opacity:.6}
+.letter-scenery{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;image-rendering:pixelated}
+.letter-paper{position:relative;padding:22px 19px 17px;background:rgba(255,252,237,.89);border:1px solid rgba(141,138,114,.45);box-shadow:3px 3px 0 rgba(70,78,64,.12)}
+.theme-blossom .letter-paper{background:rgba(255,246,244,.9);border-color:#d5b5c5}
+.theme-night .letter-paper{background:rgba(247,242,251,.94);border-color:#a49ab6;box-shadow:3px 3px 0 #22233b55}
+.letter-paper .card-stars{font-size:18px;margin-bottom:14px;letter-spacing:10px}
+.letter-paper>.card-art{width:210px;max-width:100%;height:auto;margin:8px auto 15px;image-rendering:pixelated}
+.letter-paper .eyebrow{font-size:7px;letter-spacing:1.3px;color:#90727b}
+.theme-night .letter-paper .eyebrow{color:#8d769e}
+.letter-paper .message{font-size:12px;line-height:2.1}
+.letter-paper .signature{margin-bottom:20px}
+.theme-option{overflow:hidden;padding:0 0 9px;font-size:9px}
+.theme-option>.theme-landscape{display:block;width:100%;height:76px;border-bottom:1px solid #d6c6ba;margin-bottom:9px;image-rendering:pixelated}
+.theme-option>.theme-option-name{font-size:9px;line-height:1.6;margin:0;padding:0 3px}
+@media(max-width:700px){.greeting.illustrated-letter{padding:80px 18px 100px}.letter-paper{padding:19px 14px 16px}.letter-paper .message{font-size:11px}.letter-paper h2{font-size:21px}.theme-option>.theme-landscape{height:70px}.theme-option>.theme-option-name{font-size:8px}}

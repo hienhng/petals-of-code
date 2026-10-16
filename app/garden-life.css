@@ -1,0 +1,23 @@
+.garden-life{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden;contain:paint}
+.garden-bee{position:absolute;left:0;top:0;width:28px;height:28px;will-change:transform;pointer-events:none}
+.garden-bee[hidden]{display:none}
+.garden-bee-facing{width:28px;height:28px;transform-origin:center}
+.garden-bee svg,.garden-wind-leaf{image-rendering:pixelated;shape-rendering:crispEdges}
+.garden-bee-wing{transform-box:fill-box;transform-origin:bottom center;animation:garden-bee-flap var(--bee-wing-speed,.16s) steps(2,end) infinite;animation-delay:var(--bee-wing-delay,0s)}
+.garden-bee[data-phase=visiting] .garden-bee-wing{animation-duration:.38s}
+.garden-bee[data-phase=visiting] .garden-bee-body{transform-box:fill-box;transform-origin:right center;animation:garden-bee-nectar .65s steps(3,end) infinite}
+.garden-bee[data-phase=visiting] .garden-bee-pollen{animation:garden-bee-pollen .95s steps(4,end) infinite}
+.garden-wind{position:absolute;inset:0;width:100%;height:100%;opacity:.65}
+.garden-gust{stroke:#f4f2d6;stroke-width:2;stroke-dasharray:70 170;vector-effect:non-scaling-stroke;animation:garden-wind-gust 3.8s linear infinite}
+.gust-two{animation-delay:-1.6s;animation-duration:4.7s;opacity:.65}
+.gust-three{animation-delay:-2.7s;animation-duration:4.2s;opacity:.7}
+.garden-wind-leaf{position:absolute;animation:garden-wind-leaf 5s linear infinite;opacity:0}
+.wind-leaf-0{left:4%;top:24%;animation-delay:-1.4s}
+.wind-leaf-1{left:30%;top:65%;animation-delay:-3.7s;animation-duration:6.1s}
+.wind-leaf-2{left:57%;top:17%;animation-delay:-.3s;animation-duration:5.7s}
+.wind-leaf-3{left:75%;top:76%;animation-delay:-2.5s;animation-duration:4.6s}
+@keyframes garden-bee-flap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.25)}}
+@keyframes garden-bee-nectar{0%,100%{transform:rotate(0)}50%{transform:rotate(12deg)}}
+@keyframes garden-bee-pollen{0%,100%{opacity:0;transform:translateY(0)}30%{opacity:.85}80%{opacity:0;transform:translateY(-5px)}}
+@keyframes garden-wind-gust{0%{stroke-dashoffset:430;opacity:0}15%,65%{opacity:.65}100%{stroke-dashoffset:0;opacity:0}}
+@keyframes garden-wind-leaf{0%{opacity:0;transform:translate(0,0) rotate(-35deg)}15%{opacity:.8}45%{transform:translate(70px,-10px) rotate(50deg)}75%{opacity:.8;transform:translate(130px,5px) rotate(145deg)}100%{opacity:0;transform:translate(190px,-8px) rotate(230deg)}}

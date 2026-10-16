@@ -1,0 +1,30 @@
+.maker .progress{gap:0;max-width:780px;justify-content:space-between}
+.maker .progress li{flex:1;display:block;position:relative;text-align:center}
+.maker .progress li:not(:last-child):after{content:'';position:absolute;top:15px;left:calc(50% + 22px);right:calc(-50% + 22px);height:1px;background:#dfd2cc}
+.maker .progress li.done:after{background:#a7b68f}
+.maker .progress button{width:100%;display:flex;flex-direction:column;align-items:center;gap:9px;font-size:10px;padding:0 4px;color:inherit}
+.maker .progress button:disabled{opacity:1;cursor:default}
+.maker .progress button>span:first-child{width:31px;height:31px;display:grid;place-items:center;border:1px solid #d7c5c4;background:#f5edde;position:relative;z-index:1}
+.maker .progress li.active button>span:first-child{background:#edbfc9;border-color:#ba8c9e}
+.maker .progress li.done button>span:first-child{background:#dce6cb;color:#6c855c}
+.maker-panel{min-width:0}
+.maker-panel h2:focus{outline:none}
+.flower-story{padding:20px;background:#f1f1e3;border:1px solid #d6d9be;box-shadow:3px 3px 0 #e4e4cf}
+.flower-story .eyebrow{font-size:8px;letter-spacing:1px;color:#73805b;margin-bottom:11px;line-height:1.7}
+.flower-story>p{font-size:12px;line-height:1.9;margin-bottom:7px;color:#5e624e}
+.fact-source{font-size:9px;color:#77835f;text-underline-offset:3px}
+.flower-sentiment{margin-top:17px;padding-top:13px;border-top:1px dashed #c6ccaf}
+.flower-sentiment>span{font-size:9px;color:#88836c}
+.flower-sentiment>p{font-size:11px;line-height:1.9;margin:6px 0 0;color:#7f6c78}
+.step-actions>.primary{margin-left:auto;font-size:11px}
+.maker-theme-options{display:grid;grid-template-columns:1fr;gap:16px;margin:23px 0 0}
+.maker-theme-options .theme-option{padding:0 0 15px;text-align:left;position:relative;overflow:hidden}
+.maker-theme-options .theme-landscape{height:116px;margin-bottom:13px}
+.maker-theme-options .theme-option-name{font-size:13px!important;padding:0 17px;margin-bottom:7px!important;line-height:1.6}
+.maker-theme-options .theme-description{font-size:10px;line-height:1.9;padding:0 17px;margin:0;color:#806f79;letter-spacing:0}
+.maker-theme-options .theme-check{position:absolute;right:11px;top:11px;width:25px;height:25px;display:grid;place-items:center;background:#fffaed;color:#967289;border:1px solid #bc9da6;font-size:13px}
+.maker-decorations{border:0;padding:0;margin:24px 0 0}
+.decoration-tip{font-size:10px;line-height:1.9;color:#927d89;background:#f3ecf2;padding:14px 16px;margin-top:18px}
+.maker-panel button:focus-visible,.maker .progress button:focus-visible{outline:2px solid #926581;outline-offset:4px}
+.sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
+@media(max-width:700px){.maker .progress{margin-left:-8px;margin-right:-8px;margin-bottom:29px}.maker .progress button{font-size:8px;gap:7px;padding:0 2px;line-height:1.5}.maker .progress button>span:first-child{width:27px;height:27px}.maker .progress li:not(:last-child):after{top:13px;left:calc(50% + 17px);right:calc(-50% + 17px)}.flower-story{padding:16px}.flower-story>p{font-size:11px}.maker-theme-options .theme-landscape{height:108px}.step-actions{flex-wrap:wrap}.step-actions .primary{font-size:10px;padding:10px 12px}}
