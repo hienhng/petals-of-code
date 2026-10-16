@@ -13,7 +13,7 @@ import '@fontsource/be-vietnam-pro/vietnamese-600.css';
 
 export const metadata: Metadata = {
   title: "Petals of Code — Một lời chúc, một bông hoa",
-  description: "Gửi một chút yêu thương bằng những bông hoa pixel. Chào mừng ngày Phụ nữ Việt Nam 20/10 cùng LTPC.",
+  description: "Gửi một chút yêu thương bằng những bông hoa pixel dành tặng THCS&THPT Lương Thế Vinh nhân ngày Phụ nữ Việt Nam 20/10.",
   icons: {
     icon: "/favicon.svg",
     shortcut: "/favicon.svg",

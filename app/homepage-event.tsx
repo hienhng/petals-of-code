@@ -6,9 +6,9 @@ export function HomepageEvent({onCreate}:{onCreate:()=>void}){
   <HangingVine className="event-vine"/>
   <NaturePatch className="event-patch" variant="woodland"/>
   <div className="event-story">
-   <span className="eyebrow">LTPC PRESENTS · 20.10.2026</span>
+   <span className="eyebrow">THCS&THPT LƯƠNG THẾ VINH · 20.10.2026</span>
    <h2 id="event-title">Code có thể tạo ra những điều dịu dàng.</h2>
-   <p>Petals of Code là khu vườn nhỏ của <strong>Lương Thế Vinh Tân Triều Programming Club</strong>, được tạo nên để chào mừng ngày Phụ nữ Việt Nam 20/10.</p>
+   <p>Petals of Code là khu vườn nhỏ dành tặng <strong>THCS&THPT Lương Thế Vinh</strong>, được tạo nên để chào mừng ngày Phụ nữ Việt Nam 20/10. Dự án được thực hiện bởi Lương Thế Vinh Tân Triều Programming Club.</p>
    <p>Mỗi lời chúc gửi đến mẹ, cô giáo, bạn bè hay những người phụ nữ quan trọng trong cuộc sống là một hạt mầm yêu thương. Chúng mình dùng code để giúp những hạt mầm ấy nở hoa.</p>
    <blockquote>“Every message makes a flower bloom.”</blockquote>
    <p>Không cần một món quà lớn. Đôi khi, một lời cảm ơn thật lòng là đủ để làm ngày của ai đó trở nên đặc biệt.</p>
@@ -20,7 +20,7 @@ export function HomepageEvent({onCreate}:{onCreate:()=>void}){
    <div className="event-date-month">THÁNG MƯỜI <span>✿</span></div>
    <div className="event-date-year">2026</div>
    <div className="event-card-rule"/>
-   <div className="event-card-bottom"><span>LTPC PRESENTS</span><span>LET KINDNESS BLOOM</span></div>
+   <div className="event-card-bottom"><span>LƯƠNG THẾ VINH</span><span>LET KINDNESS BLOOM</span></div>
   </aside>
  </section>;
 }

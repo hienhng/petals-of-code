@@ -2,6 +2,7 @@
 
 import {useEffect, useRef, type CSSProperties} from 'react';
 import {FlowerPixels} from './pixel-art';
+import {BeePixels,ButterflyPixels} from './insect-art';
 
 function Fern({x, y, flip = false}: {x: number; y: number; flip?: boolean}) {
   return <g transform={`translate(${x} ${y}) scale(${flip ? -1 : 1} 1)`}>
@@ -24,15 +25,7 @@ function Mushroom({x, y, small = false}: {x: number; y: number; small?: boolean}
 }
 
 function Bee({x, y}: {x: number; y: number}) {
-  return <g transform={`translate(${x} ${y})`}><g className="nature-bee">
-    <g className="nature-bee-wing"><path d="M7 6V1h6v7h3V2h6v7h-5v4H8V9H4V6z" fill="#e4eee2"/></g>
-    <g className="nature-bee-body">
-    <path d="M5 10h17v3h4v8h-5v3H5v-3H1v-8h4z" fill="#e5b95e"/>
-    <path d="M8 10h3v14H8zm8 0h3v14h-3z" fill="#75634f"/>
-    <path d="M22 14h3v4h-3z" fill="#30282d"/>
-    <path d="M4 13h3v4H4z" fill="#f8d98c"/>
-    </g>
-  </g></g>;
+  return <g transform={`translate(${x} ${y}) scale(1.65)`}><g className="nature-bee"><BeePixels/></g></g>;
 }
 
 /** Decorative SVGs have no focus targets and never intercept clicks. */
@@ -201,15 +194,11 @@ export function MeadowInsects({className = ''}: {className?: string}) {
   }, []);
 
   return <div className={`meadow-bees ${className}`} ref={layerRef} aria-hidden="true">
-    {[0, 1].map(index => <svg key={index} className="meadow-insect-flight meadow-bee-flight" viewBox="0 0 28 26" fill="none" shapeRendering="crispEdges" focusable="false">
-      <Bee x={0} y={0}/>
+    {[0, 1].map(index => <svg key={index} className="meadow-insect-flight meadow-bee-flight" viewBox="-1 -1 18 20" fill="none" shapeRendering="crispEdges" focusable="false">
+      <g className="nature-bee"><BeePixels/></g>
     </svg>)}
-    {['lavender', 'peach'].map(color => <svg key={color} className={`meadow-insect-flight meadow-butterfly-flight meadow-butterfly-${color}`} viewBox="0 0 28 26" fill="none" shapeRendering="crispEdges" focusable="false">
-      <g className="meadow-butterfly-wings">
-        <path d="M2 3h7v3h4v9H6v-4H2zm24 0h-7v3h-4v9h7v-4h4zM6 15h7v8H8v-3H6zm9 0h7v5h-2v3h-5z" fill={color === 'lavender' ? '#ad91c7' : '#d998a9'}/>
-        <path d="M4 5h4v4H4zm16 0h4v4h-4zM8 17h3v3H8zm9 0h3v3h-3z" fill={color === 'lavender' ? '#e4d2ed' : '#f8d4c2'}/>
-      </g>
-      <path d="M13 7h2v15h-2zM11 4h2v4h-2zm4 0h2v4h-2z" fill="#695568"/>
+    {['lavender', 'peach'].map(color => <svg key={color} className={`meadow-insect-flight meadow-butterfly-flight meadow-butterfly-${color}`} viewBox="-1 -1 18 16" fill="none" shapeRendering="crispEdges" focusable="false">
+      <ButterflyPixels/>
     </svg>)}
   </div>;
 }

@@ -1,12 +1,19 @@
 .garden-life{position:absolute;inset:0;pointer-events:none;z-index:5;overflow:hidden;contain:paint}
-.garden-bee{position:absolute;left:0;top:0;width:28px;height:28px;will-change:transform;pointer-events:none}
-.garden-bee[hidden]{display:none}
-.garden-bee-facing{width:28px;height:28px;transform-origin:center}
-.garden-bee svg,.garden-wind-leaf{image-rendering:pixelated;shape-rendering:crispEdges}
-.garden-bee-wing{transform-box:fill-box;transform-origin:bottom center;animation:garden-bee-flap var(--bee-wing-speed,.16s) steps(2,end) infinite;animation-delay:var(--bee-wing-delay,0s)}
-.garden-bee[data-phase=visiting] .garden-bee-wing{animation-duration:.38s}
-.garden-bee[data-phase=visiting] .garden-bee-body{transform-box:fill-box;transform-origin:right center;animation:garden-bee-nectar .65s steps(3,end) infinite}
-.garden-bee[data-phase=visiting] .garden-bee-pollen{animation:garden-bee-pollen .95s steps(4,end) infinite}
+.garden-insect{position:absolute;left:0;top:0;width:32px;height:28px;will-change:transform;pointer-events:none}
+.garden-insect[hidden]{display:none}
+.garden-insect-facing{width:32px;height:28px;transform-origin:center}
+.garden-insect svg,.garden-wind-leaf{image-rendering:pixelated;shape-rendering:crispEdges}
+.garden-bee{width:28px}
+.garden-bee .bee-wings{transform-box:view-box;transform-origin:7px 7px;animation:bee-buzz var(--bee-wing-speed,.16s) steps(2,end) infinite;animation-delay:var(--bee-wing-delay,0s)}
+.garden-bee .bee-wing-back{animation-delay:calc(var(--bee-wing-delay,0s) - .08s)}
+.garden-bee[data-phase=visiting] .bee-wings{animation-duration:.38s}
+.garden-bee[data-phase=visiting] .bee-body{transform-box:fill-box;transform-origin:right center;animation:garden-bee-nectar .65s steps(3,end) infinite}
+.garden-bee[data-phase=visiting] .bee-pollen-dust{animation:garden-bee-pollen .95s steps(4,end) infinite}
+.garden-butterfly svg{overflow:visible}
+.garden-butterfly .butterfly-rest{transform-box:fill-box;transform-origin:center;animation:garden-butterfly-hover 3.6s steps(2,end) infinite}
+.garden-butterfly .wing-left{transform-box:fill-box;transform-origin:right center;animation:garden-wing-left .72s ease-in-out infinite}
+.garden-butterfly .wing-right{transform-box:fill-box;transform-origin:left center;animation:garden-wing-right .72s ease-in-out -.04s infinite}
+.garden-butterfly[data-phase=visiting] :is(.wing-left,.wing-right){animation-duration:1.3s}
 .garden-wind{position:absolute;inset:0;width:100%;height:100%;opacity:.65}
 .garden-gust{stroke:#f4f2d6;stroke-width:2;stroke-dasharray:70 170;vector-effect:non-scaling-stroke;animation:garden-wind-gust 3.8s linear infinite}
 .gust-two{animation-delay:-1.6s;animation-duration:4.7s;opacity:.65}
@@ -16,8 +23,11 @@
 .wind-leaf-1{left:30%;top:65%;animation-delay:-3.7s;animation-duration:6.1s}
 .wind-leaf-2{left:57%;top:17%;animation-delay:-.3s;animation-duration:5.7s}
 .wind-leaf-3{left:75%;top:76%;animation-delay:-2.5s;animation-duration:4.6s}
-@keyframes garden-bee-flap{0%,100%{transform:scaleY(1)}50%{transform:scaleY(.25)}}
 @keyframes garden-bee-nectar{0%,100%{transform:rotate(0)}50%{transform:rotate(12deg)}}
 @keyframes garden-bee-pollen{0%,100%{opacity:0;transform:translateY(0)}30%{opacity:.85}80%{opacity:0;transform:translateY(-5px)}}
+@keyframes garden-wing-left{0%,100%{transform:rotateY(0)}50%{transform:rotateY(62deg)}}
+@keyframes garden-wing-right{0%,100%{transform:rotateY(0)}50%{transform:rotateY(-62deg)}}
+@keyframes garden-butterfly-hover{0%,100%{transform:translateY(0) rotate(-3deg)}40%{transform:translateY(-3px) rotate(4deg)}70%{transform:translateY(-1px) rotate(-5deg)}}
 @keyframes garden-wind-gust{0%{stroke-dashoffset:430;opacity:0}15%,65%{opacity:.65}100%{stroke-dashoffset:0;opacity:0}}
 @keyframes garden-wind-leaf{0%{opacity:0;transform:translate(0,0) rotate(-35deg)}15%{opacity:.8}45%{transform:translate(70px,-10px) rotate(50deg)}75%{opacity:.8;transform:translate(130px,5px) rotate(145deg)}100%{opacity:0;transform:translate(190px,-8px) rotate(230deg)}}
+@media(prefers-reduced-motion:reduce){.garden-insect{will-change:auto}.garden-insect .bee-wings,.garden-insect .butterfly-rest,.garden-insect .wing-left,.garden-insect .wing-right{animation:none}}

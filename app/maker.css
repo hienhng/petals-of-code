@@ -1,30 +1,158 @@
-.maker .progress{gap:0;max-width:780px;justify-content:space-between}
-.maker .progress li{flex:1;display:block;position:relative;text-align:center}
-.maker .progress li:not(:last-child):after{content:'';position:absolute;top:15px;left:calc(50% + 22px);right:calc(-50% + 22px);height:1px;background:#dfd2cc}
-.maker .progress li.done:after{background:#a7b68f}
-.maker .progress button{width:100%;display:flex;flex-direction:column;align-items:center;gap:9px;font-size:10px;padding:0 4px;color:inherit}
+/* A quiet workspace for choosing, writing, and seeing the card take shape. */
+.maker.page-wrap{max-width:1380px;padding:42px 36px 72px;display:grid;grid-template-columns:170px minmax(0,1fr);column-gap:30px;align-items:start}
+.maker>.section-heading{grid-column:1/-1;text-align:left;margin:0 0 32px;padding:0 0 26px;border-bottom:1px solid #e5dcd0}
+.maker>.section-heading .eyebrow{color:#8b9474;font-size:9px;letter-spacing:2px;margin-bottom:12px}
+.maker>.section-heading h1{font-size:32px;letter-spacing:-1.2px;margin-bottom:8px;color:#5d4e5a}
+.maker>.section-heading p{font-size:12px;color:#95858a;margin:0;line-height:1.9}
+.maker .progress{grid-column:1;grid-row:2;position:sticky;top:26px;display:flex;flex-direction:column;align-items:stretch;gap:8px;max-width:none;width:100%;margin:0;padding:0;list-style:none}
+.maker .progress:before{content:'TỪNG CHÚT MỘT';font-size:8px;letter-spacing:1.8px;color:#a19987;padding:7px 10px 16px}
+.maker .progress li{flex:initial;display:block;position:relative;text-align:left;color:#a39899;border:1px solid transparent;border-radius:6px}
+.maker .progress li:not(:last-child):after{content:none}
+.maker .progress button{display:flex;flex-direction:row;align-items:center;gap:11px;width:100%;padding:13px 9px;font-size:11px;text-align:left;line-height:1.5;color:inherit}
 .maker .progress button:disabled{opacity:1;cursor:default}
-.maker .progress button>span:first-child{width:31px;height:31px;display:grid;place-items:center;border:1px solid #d7c5c4;background:#f5edde;position:relative;z-index:1}
-.maker .progress li.active button>span:first-child{background:#edbfc9;border-color:#ba8c9e}
-.maker .progress li.done button>span:first-child{background:#dce6cb;color:#6c855c}
-.maker-panel{min-width:0}
+.maker .progress button>span:first-child{display:grid;place-items:center;flex-shrink:0;width:29px;height:29px;border:1px solid #dfd6c9;background:#fbf6ec;border-radius:3px;font-size:10px;color:#aaa08c}
+.maker .progress button>span:last-child{font-weight:500}
+.maker .progress small{display:block;font-size:8px;font-weight:400;color:#a89d98;margin-top:5px;line-height:1.6}
+.maker .progress li.active{background:#f4e7e9;border-color:#e1c9d0;color:#825d70}
+.maker .progress li.active button>span:first-child{background:#dca2b3;border-color:#b58094;color:#fffaf2}
+.maker .progress li.active small{color:#ac8696}
+.maker .progress li.done{color:#7b896c}
+.maker .progress li.done button>span:first-child{background:#e7eddd;border-color:#c4d0b3;color:#7c8c69}
+.maker .progress li.done:hover{background:#f0f1e5}
+.maker>.maker-columns,.maker>.result-columns{grid-column:2;grid-row:2;display:grid;grid-template-columns:minmax(0,1.18fr) minmax(290px,1fr);gap:30px;width:100%;align-items:start}
+.maker>.bloom-stage{grid-column:2;grid-row:2}
+.maker .maker-panel{min-width:0;padding:28px;background:#fffdf7;border:1px solid #ded4c9;box-shadow:0 4px 0 #eee5d7;border-radius:8px}
 .maker-panel h2:focus{outline:none}
-.flower-story{padding:20px;background:#f1f1e3;border:1px solid #d6d9be;box-shadow:3px 3px 0 #e4e4cf}
-.flower-story .eyebrow{font-size:8px;letter-spacing:1px;color:#73805b;margin-bottom:11px;line-height:1.7}
-.flower-story>p{font-size:12px;line-height:1.9;margin-bottom:7px;color:#5e624e}
-.fact-source{font-size:9px;color:#77835f;text-underline-offset:3px}
-.flower-sentiment{margin-top:17px;padding-top:13px;border-top:1px dashed #c6ccaf}
-.flower-sentiment>span{font-size:9px;color:#88836c}
-.flower-sentiment>p{font-size:11px;line-height:1.9;margin:6px 0 0;color:#7f6c78}
-.step-actions>.primary{margin-left:auto;font-size:11px}
-.maker-theme-options{display:grid;grid-template-columns:1fr;gap:16px;margin:23px 0 0}
-.maker-theme-options .theme-option{padding:0 0 15px;text-align:left;position:relative;overflow:hidden}
-.maker-theme-options .theme-landscape{height:116px;margin-bottom:13px}
-.maker-theme-options .theme-option-name{font-size:13px!important;padding:0 17px;margin-bottom:7px!important;line-height:1.6}
-.maker-theme-options .theme-description{font-size:10px;line-height:1.9;padding:0 17px;margin:0;color:#806f79;letter-spacing:0}
-.maker-theme-options .theme-check{position:absolute;right:11px;top:11px;width:25px;height:25px;display:grid;place-items:center;background:#fffaed;color:#967289;border:1px solid #bc9da6;font-size:13px}
-.maker-decorations{border:0;padding:0;margin:24px 0 0}
-.decoration-tip{font-size:10px;line-height:1.9;color:#927d89;background:#f3ecf2;padding:14px 16px;margin-top:18px}
-.maker-panel button:focus-visible,.maker .progress button:focus-visible{outline:2px solid #926581;outline-offset:4px}
+.maker-preview-jump,.maker-editor-jump{display:none}
+.maker .maker-panel .panel-label{display:inline-flex;align-items:center;min-height:26px;padding:4px 9px;margin:0 0 17px;border:1px solid #e1e4d4;background:#f1f3e7;border-radius:3px;font-size:8px;letter-spacing:1.2px;color:#83916e}
+.maker .maker-panel h2{font-size:23px;letter-spacing:-.6px;line-height:1.5;margin-bottom:10px}
+.maker .maker-panel>.muted{font-size:11px;line-height:1.9;color:#9b8990;margin-bottom:0}
+.maker .flower-options{grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:23px 0 21px;max-height:366px;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#d5c7c5 transparent;padding:3px 6px 5px 3px}
+.maker .flower-options button,.maker .flower-options button.selected{min-height:107px;padding:12px 5px 10px;border:1px solid #e8dfd3;border-radius:5px;background:#fbf8f0;font-size:10px;gap:7px;transition:background .18s,border-color .18s}
+.maker .flower-options button:hover{border-color:#cbb1be;background:#fbf0f1}
+.maker .flower-options button.selected{border-color:#bc8ca0;background:#fae9ee;box-shadow:inset 0 0 0 1px #bc8ca0}
+.maker .flower-options .flower{width:41px;height:51px}
+.maker .flower-options button span{min-height:17px;line-height:1.6}
+.maker .flower-options b,.maker .decoration-options b{right:7px;top:5px;font-size:10px;color:#9c6e85}
+.maker .flower-story{padding:17px 18px;background:#f3f4e9;border:1px solid #dfe3cf;border-radius:5px;box-shadow:none}
+.maker .flower-story .eyebrow{font-size:8px;letter-spacing:.9px;color:#85916d;margin-bottom:9px;line-height:1.8}
+.maker .flower-story>p{font-size:11px;line-height:1.9;margin-bottom:7px;color:#727860}
+.maker .fact-source{font-size:9px;color:#869071;text-underline-offset:3px}
+.maker .flower-sentiment{margin-top:14px;padding-top:12px;border-top:1px solid #e0e3cf}
+.maker .flower-sentiment>span{font-size:8px;color:#9a937f;text-transform:uppercase;letter-spacing:1px}
+.maker .flower-sentiment>p{font-size:11px;line-height:1.9;margin:6px 0 0;color:#8c7785}
+.maker .form-actions{gap:12px;flex-wrap:wrap;margin-top:24px;padding-top:21px;border-top:1px solid #eee4da}
+.maker .step-actions>.primary{margin-left:auto;font-size:10px}
+.maker .pixel-button{min-height:44px;box-shadow:2px 2px 0 #a78391;font-size:10px;padding:11px 16px}
+.maker .pixel-button:hover{box-shadow:3px 4px 0 #a78391}
+.maker .pixel-button:active{box-shadow:none}
+.maker .form-actions .text-link{font-size:10px;color:#aa8e9b}
+.maker .maker-theme-options{display:grid;grid-template-columns:1fr;gap:12px;margin:23px 0 0}
+.maker .maker-theme-options .theme-option{display:grid;grid-template-columns:108px minmax(0,1fr);grid-template-rows:auto 1fr;gap:5px 14px;align-items:center;text-align:left;padding:10px;border:1px solid #e4d9ce;border-radius:6px;background:#fcf8f0;outline:none;position:relative;overflow:hidden;min-height:114px}
+.maker .maker-theme-options .theme-option:hover{border-color:#b9bca3;background:#f7f6ea}
+.maker .maker-theme-options .theme-option.selected{border-color:#a4b08a;background:#f1f4e8;box-shadow:inset 0 0 0 1px #a4b08a}
+.maker .maker-theme-options .theme-landscape{grid-column:1;grid-row:1/3;width:108px;height:90px;margin:0;border:1px solid #dedaca;border-radius:3px}
+.maker .maker-theme-options .theme-option-name{grid-column:2;grid-row:1;padding:2px 16px 0 0;margin:0!important;font-size:12px!important;line-height:1.6;color:#716370}
+.maker .maker-theme-options .theme-description{grid-column:2;grid-row:2;padding:0;margin:0;font-size:9px;line-height:1.8;color:#9c8990;letter-spacing:0;align-self:start}
+.maker .maker-theme-options .theme-check{position:absolute;right:8px;top:8px;width:16px;height:16px;display:grid;place-items:center;background:#dae3ca;color:#74845c;border:0;border-radius:50%;font-size:9px}
+.maker .maker-decorations{border:0;padding:0;margin:23px 0 0}
+.maker .decoration-options{gap:10px}
+.maker .decoration-options button,.maker .decoration-options button.selected{min-height:109px;padding:13px 5px 11px;border:1px solid #e5d9d3;border-radius:5px;background:#fbf8f0;gap:9px;font-size:10px}
+.maker .decoration-options button:hover:not(:disabled){border-color:#c9aebc;background:#fbf0f1}
+.maker .decoration-options button.selected{border-color:#bc8ca0;background:#fae9ee;box-shadow:inset 0 0 0 1px #bc8ca0}
+.maker .decoration-options svg{width:37px;height:37px}
+.maker .decoration-options button:disabled{opacity:.4}
+.maker .decoration-summary{font-size:9px;margin-top:9px;color:#a28e99}
+.maker .decoration-summary .text-link{font-size:9px}
+.maker .decoration-tip{font-size:10px;line-height:1.9;color:#978392;background:#f4eff4;border:1px solid #e9e0e9;border-radius:5px;padding:13px 15px;margin:16px 0 0}
+.maker .editor label:not(.checkbox){font-size:11px;font-weight:500;margin-top:20px}
+.maker .editor input:not([type=checkbox]),.maker .editor textarea{border-color:#e1d5d0;background:#fcf9f2;border-radius:4px;font-size:12px;padding:12px 13px;line-height:1.8}
+.maker .editor input:focus,.maker .editor textarea:focus{background:#fffdf8;outline:2px solid #ccb1bd;outline-offset:1px}
+.maker .inspiration button{border-radius:3px;background:#f3edf2;border-color:#e0d2dd;font-size:9px;padding:6px 10px}
+.maker .privacy-note{font-size:9px;color:#a2979a;line-height:1.9}
+.maker .preview-column{position:sticky;top:26px;min-width:0;padding:0 0 8px;width:100%;max-width:420px;margin:0 auto}
+.maker-preview-heading{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:1px 0 14px;padding:0 3px}
+.maker-preview-heading .eyebrow{font-size:7px;letter-spacing:1.5px;color:#9c9c85;margin:0 0 6px}
+.maker-preview-heading h2{font-size:18px;font-weight:500;letter-spacing:-.5px;margin:0;color:#796774}
+.preview-live{display:inline-flex;align-items:center;gap:4px;white-space:nowrap;border:1px solid #dbe2cd;background:#f2f5e9;border-radius:3px;padding:4px 7px;font-size:8px;color:#839270}
+.preview-live .green-dot{width:4px;height:4px;margin-right:1px}
+.preview-selection{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 17px;padding:0 3px}
+.preview-selection>span{font-size:8px;color:#a18b97;line-height:1.7;padding:3px 7px;background:#f4ede7;border:1px solid #e7ded4;border-radius:3px}
+.maker .preview-column .greeting{width:100%;max-width:100%;margin:0;box-shadow:4px 4px 0 #e6dacf;border-width:1px;padding:67px 18px 80px;min-height:0}
+.maker .preview-column .letter-paper{padding:21px 15px 15px}
+.maker .preview-column .letter-paper h2{font-size:20px;line-height:1.5;margin:13px 0}
+.maker .preview-column .letter-paper .card-stars{font-size:15px;margin-bottom:13px}
+.maker .preview-column .letter-paper>.card-art{width:184px;margin:5px auto 13px}
+.maker .preview-column .letter-paper .message{font-size:11px;line-height:2}
+.maker .preview-column .signature{font-size:9px;margin-top:17px;margin-bottom:17px}
+.maker .preview-column>p{font-size:9px;text-align:center;color:#ad999f;margin:19px 0 0;line-height:1.8}
+.maker-panel button:focus-visible,.maker .progress button:focus-visible{outline:2px solid #926581;outline-offset:3px}
 .sr-only{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}
-@media(max-width:700px){.maker .progress{margin-left:-8px;margin-right:-8px;margin-bottom:29px}.maker .progress button{font-size:8px;gap:7px;padding:0 2px;line-height:1.5}.maker .progress button>span:first-child{width:27px;height:27px}.maker .progress li:not(:last-child):after{top:13px;left:calc(50% + 17px);right:calc(-50% + 17px)}.flower-story{padding:16px}.flower-story>p{font-size:11px}.maker-theme-options .theme-landscape{height:108px}.step-actions{flex-wrap:wrap}.step-actions .primary{font-size:10px;padding:10px 12px}}
+@media(max-width:1150px){
+ .maker.page-wrap{display:block;max-width:1060px;padding:35px 28px 60px}
+ .maker>.section-heading{margin-bottom:24px;padding-bottom:23px}
+ .maker .progress{position:static;flex-direction:row;gap:7px;margin:0 0 26px}
+ .maker .progress:before{content:none}
+ .maker .progress li{flex:1;min-width:0}
+ .maker .progress button{padding:10px 8px;gap:8px;font-size:10px}
+ .maker .progress small{font-size:7px;margin-top:3px}
+ .maker .progress button>span:first-child{width:25px;height:25px;font-size:9px}
+ .maker>.maker-columns,.maker>.result-columns{gap:24px;grid-template-columns:minmax(0,1.12fr) minmax(280px,1fr)}
+ .maker .maker-panel{padding:24px}
+}
+@media(max-width:880px){
+ .maker.page-wrap{padding:28px 22px 50px}
+ .maker>.section-heading h1{font-size:27px}
+ .maker .progress small{display:none}
+ .maker .progress button{justify-content:center;gap:7px;padding:10px 5px;font-size:9px}
+ .maker>.maker-columns,.maker>.result-columns{gap:20px;grid-template-columns:minmax(0,1fr) minmax(265px,.92fr)}
+ .maker .maker-panel{padding:21px}
+ .maker .maker-panel h2{font-size:20px}
+ .maker .flower-options{gap:7px;max-height:340px}
+ .maker .flower-options button,.maker .flower-options button.selected{min-height:100px;font-size:9px;padding:11px 3px}
+ .maker .maker-theme-options .theme-option{grid-template-columns:80px minmax(0,1fr);gap:5px 10px;padding:9px}
+ .maker .maker-theme-options .theme-landscape{width:80px;height:94px}
+ .maker .maker-theme-options .theme-description{font-size:8px}
+ .maker .maker-theme-options .theme-option-name{font-size:10px!important}
+ .maker-preview-heading h2{font-size:16px}
+ .preview-live{font-size:7px;padding:4px}
+ .maker .preview-column .greeting{padding:61px 14px 75px}
+ .maker .preview-column .letter-paper{padding:19px 12px 14px}
+ .maker .preview-column .letter-paper h2{font-size:18px}
+ .maker .preview-column .letter-paper>.card-art{width:170px}
+}
+@media(max-width:700px){
+ .maker.page-wrap{padding:26px 18px 45px}
+ .maker>.section-heading{text-align:left;margin-bottom:18px;padding-bottom:20px}
+ .maker>.section-heading .eyebrow{font-size:7px;letter-spacing:1.6px;margin-bottom:10px}
+ .maker>.section-heading h1{font-size:25px;line-height:1.45;max-width:310px}
+ .maker>.section-heading p{font-size:10px;line-height:1.9;max-width:310px}
+ .maker .progress{gap:3px;margin:0 0 23px;width:100%}
+ .maker .progress li{border-radius:4px}
+ .maker .progress button{flex-direction:column;gap:6px;padding:9px 2px 8px;font-size:8px;text-align:center}
+ .maker .progress button>span:first-child{width:24px;height:24px;font-size:8px}
+ .maker>.maker-columns,.maker>.result-columns{display:grid;grid-template-columns:minmax(0,1fr);gap:31px}
+ .maker .maker-panel{padding:22px 19px}
+ .maker .maker-panel h2{font-size:22px}
+ .maker-preview-jump{display:inline-flex;font-size:9px;line-height:1.8;color:#a07e91;text-underline-offset:3px;margin:0 0 12px}
+ .maker .maker-editor-jump{display:block;text-align:center;font-size:10px;color:#a07e91;text-underline-offset:3px;margin:10px auto 0;padding:7px}
+ .maker .maker-panel>.muted{font-size:10px}
+ .maker .flower-options{max-height:349px;margin-top:19px;gap:8px}
+ .maker .flower-options button,.maker .flower-options button.selected{min-height:106px;font-size:9px}
+ .maker .flower-story{padding:16px}
+ .maker .maker-theme-options .theme-option{grid-template-columns:99px minmax(0,1fr);gap:5px 13px;padding:10px}
+ .maker .maker-theme-options .theme-landscape{width:99px;height:94px}
+ .maker .maker-theme-options .theme-option-name{font-size:12px!important}
+ .maker .maker-theme-options .theme-description{font-size:9px}
+ .maker .decoration-options button,.maker .decoration-options button.selected{font-size:9px;min-height:103px}
+ .maker .form-actions .primary{flex:1;min-width:180px}
+ .maker .step-actions .primary{flex:initial;min-width:0;font-size:9px;padding:10px 12px}
+ .maker .preview-column{position:static;max-width:390px}
+ .maker .preview-column .greeting{padding:68px 18px 83px}
+ .maker .preview-column .letter-paper{padding:22px 16px 17px}
+ .maker .preview-column .letter-paper h2{font-size:21px}
+ .maker .preview-column .letter-paper>.card-art{width:194px}
+ .maker-preview-heading h2{font-size:19px}
+ .preview-live{font-size:8px;padding:4px 7px}
+}
+@media(prefers-reduced-motion:reduce){.maker .flower-options button{transition:none}}

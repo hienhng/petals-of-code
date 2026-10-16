@@ -211,7 +211,13 @@
 }
 .homepage .scene-petal { animation: home-petal-drift var(--petal-duration, 14s) linear var(--petal-delay, 0s) infinite; }
 .homepage .scene-mote { animation: home-pollen-drift 7s ease-in-out infinite; }
-.homepage .butterfly svg { animation: home-butterfly-flutter .85s ease-in-out infinite; transform-origin: center; }
+.homepage .butterfly svg { overflow: visible; }
+/* Ambient insects use the same articulated sprite parts as card decorations. */
+.homepage .wing-left { transform-box: fill-box; transform-origin: right center; animation: wing-open-left .72s ease-in-out infinite; }
+.homepage .wing-right { transform-box: fill-box; transform-origin: left center; animation: wing-open-right .72s ease-in-out infinite; animation-delay: -.04s; }
+.homepage .butterfly-rest { transform-box: fill-box; transform-origin: center; animation: butterfly-rest 3.6s steps(2, end) infinite; }
+.homepage .meadow-butterfly-peach .wing-left, .homepage .meadow-butterfly-peach .wing-right { animation-duration: .83s; animation-delay: -.3s; }
+.homepage .meadow-butterfly-flight[data-pollinating=true] :is(.wing-left, .wing-right) { animation-duration: 1.3s; }
 @keyframes home-cloud-drift { from { translate: -8px 0; } to { translate: 18px 0; } }
 @keyframes home-canopy-breeze { 0%, 100% { rotate: -.35deg; } 50% { rotate: .55deg; } }
 @keyframes home-flower-sway { 0%, 100% { rotate: calc(var(--breeze-angle, 2deg) * -1); } 50% { rotate: var(--breeze-angle, 2deg); } }
@@ -224,7 +230,6 @@
   100% { translate: 53px 116px; rotate: 190deg; opacity: 0; }
 }
 @keyframes home-pollen-drift { 0%, 100% { translate: 0 6px; opacity: 0; } 40% { opacity: .8; } 80% { translate: 9px -17px; opacity: 0; } }
-@keyframes home-butterfly-flutter { 0%, 100% { scale: 1 1; } 50% { scale: .35 1; } }
 
 @media (hover: hover) {
   .homepage .primary:hover { background: #e9a7ba; box-shadow: 4px 5px 0 #9c6d81; }
@@ -330,18 +335,14 @@
 .homepage .meadow-bees { position: absolute; inset: 0; overflow: hidden; }
 .homepage .meadow-insect-flight { position: absolute; top: 0; left: 0; width: clamp(24px, 2.4vw, 36px); height: auto; offset-anchor: 0 0; offset-position: 0 0; offset-rotate: 0deg; transform: translateX(-200%); will-change: offset-distance; }
 .homepage .meadow-butterfly-flight { width: clamp(26px, 2.7vw, 38px); }
-.homepage .meadow-butterfly-wings { transform-box: view-box; transform-origin: 50% 50%; animation: meadow-butterfly-flutter .6s ease-in-out infinite; }
-.homepage .meadow-butterfly-peach .meadow-butterfly-wings { animation-duration: .73s; animation-delay: -.3s; }
-.homepage .meadow-butterfly-flight[data-pollinating=true] .meadow-butterfly-wings { animation-duration: 1.3s; }
-@keyframes meadow-butterfly-flutter { 0%, 100% { transform: scaleX(1); } 50% { transform: scaleX(.18); } }
 .homepage .meadow-bee-flight .nature-bee { animation: none; }
 .homepage .meadow-bee-flight { overflow: visible; }
-.homepage .meadow-bee-flight .nature-bee-wing { transform-box: fill-box; transform-origin: bottom center; animation: meadow-bee-flap .16s steps(2, end) infinite; }
-.homepage .meadow-bee-flight[data-pollinating=true] .nature-bee-wing { animation-duration: .38s; }
-.homepage .meadow-bee-flight[data-pollinating=true] .nature-bee-body { transform-box: fill-box; transform-origin: right center; animation: meadow-bee-nectar .65s steps(3, end) infinite; }
+.homepage .nature-bee .bee-wings { transform-box: view-box; transform-origin: 7px 7px; animation: bee-buzz .16s steps(2, end) infinite; }
+.homepage .nature-bee .bee-wing-back { animation-delay: -.08s; }
+.homepage .meadow-bee-flight[data-pollinating=true] .bee-wings { animation-duration: .38s; }
+.homepage .meadow-bee-flight[data-pollinating=true] .bee-body { transform-box: fill-box; transform-origin: right center; animation: meadow-bee-nectar .65s steps(3, end) infinite; }
 /* Match the garden bees' stepped nectar-gathering shake. */
 @keyframes meadow-bee-nectar { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(12deg); } }
-@keyframes meadow-bee-flap { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(.25); } }
 /* Let the SVG's aspect ratio set its height; a fixed-height slice crops tall blooms on wide screens. */
 .homepage .home-meadow > svg { display: block; width: 100%; height: auto; min-width: 1000px; position: relative; left: 50%; transform: translateX(-50%); image-rendering: pixelated; }
 .homepage .nature-stem { transform-box: fill-box; transform-origin: center bottom; animation: nature-sprig-breeze 5.3s ease-in-out infinite; }
@@ -378,8 +379,7 @@
   .homepage .meadow-bee-flight:nth-child(2) { left: 70%; top: 30%; }
   .homepage .meadow-butterfly-lavender { left: 44%; top: 8%; }
   .homepage .meadow-butterfly-peach { left: 84%; top: 22%; }
-  .homepage .meadow-butterfly-wings { animation: none !important; }
-  .homepage .meadow-bee-flight .nature-bee-body, .homepage .meadow-bee-flight .nature-bee-wing { animation: none !important; }
+  .homepage .meadow-bee-flight .bee-body, .homepage .meadow-bee-flight .bee-wings { animation: none !important; }
 }
 
 /* The insects stay in the illustrated garden, below the headline and actions. */

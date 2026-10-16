@@ -1,6 +1,6 @@
-.greeting.illustrated-letter{padding:90px 22px 110px;isolation:isolate;background:#dcecf0;border-color:#8f9b83}
-.illustrated-letter.theme-blossom{background:#f8e3ec;border-color:#b18e9f}
-.illustrated-letter.theme-night{background:#2f304c;border-color:#7c7697}
+.greeting.illustrated-letter{padding:90px 22px 110px;isolation:isolate;background:#d4e8e7;border-color:#8fa792}
+.illustrated-letter.theme-blossom{background:#f2dde8;border-color:#b291a4}
+.illustrated-letter.theme-night{background:#252e4a;border-color:#6a7691}
 .illustrated-letter:before{inset:8px;z-index:3;border-color:#fff6e8;opacity:.6}
 .letter-scenery{position:absolute;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none;image-rendering:pixelated}
 .letter-paper{position:relative;padding:22px 19px 17px;background:rgba(255,252,237,.89);border:1px solid rgba(141,138,114,.45);box-shadow:3px 3px 0 rgba(70,78,64,.12)}
@@ -15,4 +15,50 @@
 .theme-option{overflow:hidden;padding:0 0 9px;font-size:9px}
 .theme-option>.theme-landscape{display:block;width:100%;height:76px;border-bottom:1px solid #d6c6ba;margin-bottom:9px;image-rendering:pixelated}
 .theme-option>.theme-option-name{font-size:9px;line-height:1.6;margin:0;padding:0 3px}
+
+/* Scenery moves inside fixed SVG placement groups so exports keep every detail
+   without depending on CSS. Only transforms and opacity change during playback. */
+.animated-scenery{overflow:hidden}
+.animated-scenery .scenery-grass,.animated-scenery .scenery-flower,.animated-scenery .scenery-canopy{transform-box:fill-box;transform-origin:center bottom}
+.animated-scenery .scenery-petal,.animated-scenery .scenery-ripple{transform-box:fill-box;transform-origin:center}
+.animated-scenery[data-animate=true] .scenery-cloud{animation:scenery-cloud-drift var(--scene-duration,26s) ease-in-out infinite alternate;animation-delay:var(--scene-delay,0s)}
+.animated-scenery[data-animate=true] .scenery-grass{animation:scenery-grass-sway var(--scene-duration,5s) ease-in-out infinite;animation-delay:var(--scene-delay,0s)}
+.animated-scenery[data-animate=true] .scenery-flower{animation:scenery-flower-sway var(--scene-duration,6s) ease-in-out infinite;animation-delay:var(--scene-delay,0s)}
+.animated-scenery[data-animate=true] .scenery-canopy{animation:scenery-canopy-sway var(--scene-duration,8s) ease-in-out infinite;animation-delay:var(--scene-delay,0s)}
+.animated-scenery[data-animate=true] .scenery-petal{animation:scenery-petal-fall var(--scene-duration,11s) linear infinite;animation-delay:var(--scene-delay,0s)}
+.animated-scenery[data-animate=true] .scenery-ripple{animation:scenery-water-shimmer var(--scene-duration,7s) ease-in-out infinite;animation-delay:var(--scene-delay,0s)}
+.animated-scenery[data-animate=true] .scenery-star,.animated-scenery[data-animate=true] .scenery-star-small{animation:scenery-star-twinkle var(--scene-duration,6s) ease-in-out infinite;animation-delay:var(--scene-delay,0s)}
+.animated-scenery[data-animate=true] .scenery-star-small{animation-direction:reverse}
+.animated-scenery[data-animate=true] .scenery-moon-glow{animation:scenery-moon-breathe 10s ease-in-out infinite}
+.animated-scenery[data-animate=true] .scenery-sun-glow{animation:scenery-sun-breathe 12s ease-in-out infinite}
+.animated-scenery[data-animate=true] .scenery-birds{animation:scenery-birds-drift 24s ease-in-out infinite alternate}
+.animated-scenery[data-animate=true] .scenery-seed{animation:scenery-seed-drift var(--scene-duration,12s) ease-in-out infinite;animation-delay:var(--scene-delay,0s)}
+.animated-scenery[data-animate=true] .scenery-meteor{animation:scenery-shooting-star 18s linear infinite;animation-delay:-4s}
+.animated-scenery[data-animate=true] .scenery-window{animation:scenery-window-warmth 8s ease-in-out infinite}
+.animated-scenery[data-animate=true] .scenery-smoke{animation:scenery-smoke-rise 7s ease-out infinite;animation-delay:-3s}
+.animated-scenery[data-animate=true] .scenery-lantern{animation:scenery-firefly-drift var(--scene-duration,8s) ease-in-out infinite;animation-delay:var(--scene-delay,0s)}
+.animated-scenery[data-animate=true] .scenery-koi{animation:scenery-koi-swim var(--scene-duration,14s) ease-in-out infinite alternate;animation-delay:var(--scene-delay,0s)}
+
+/* Picker scenes come to life on selection, hover, or keyboard focus. */
+.theme-landscape.animated-scenery[data-animate=true] *{animation-play-state:paused}
+.theme-option:is(:hover,:focus-visible,.selected) .theme-landscape.animated-scenery[data-animate=true] *{animation-play-state:running}
+
+@keyframes scenery-cloud-drift{from{transform:translateX(-5px)}to{transform:translateX(14px)}}
+@keyframes scenery-grass-sway{0%,100%{transform:skewX(-5deg)}50%{transform:skewX(7deg)}}
+@keyframes scenery-flower-sway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(4deg)}}
+@keyframes scenery-canopy-sway{0%,100%{transform:rotate(-.7deg)}50%{transform:rotate(.9deg)}}
+@keyframes scenery-petal-fall{0%{opacity:0;transform:translate(-5px,-12px) rotate(-15deg)}12%{opacity:.8}35%{transform:translate(6px,14px) rotate(25deg)}65%{opacity:.85;transform:translate(-3px,38px) rotate(70deg)}92%,100%{opacity:0;transform:translate(8px,66px) rotate(125deg)}}
+@keyframes scenery-water-shimmer{0%,100%{opacity:.45;transform:translateX(-2px) scaleX(.9)}50%{opacity:1;transform:translateX(3px) scaleX(1.05)}}
+@keyframes scenery-star-twinkle{0%,100%{opacity:.4}45%{opacity:1}70%{opacity:.65}}
+@keyframes scenery-moon-breathe{0%,100%{opacity:.07}50%{opacity:.17}}
+@keyframes scenery-sun-breathe{0%,100%{opacity:.3}50%{opacity:.55}}
+@keyframes scenery-birds-drift{0%{transform:translate(0,0)}50%{transform:translate(15px,-3px)}100%{transform:translate(28px,2px)}}
+@keyframes scenery-seed-drift{0%,100%{opacity:0;transform:translate(-3px,4px)}20%{opacity:.7}70%{opacity:.5;transform:translate(9px,-12px)}90%{opacity:0;transform:translate(16px,-20px)}}
+@keyframes scenery-shooting-star{0%,85%,100%{opacity:0;transform:translate(60px,-20px)}87%{opacity:.9}93%{opacity:0;transform:translate(-15px,18px)}}
+@keyframes scenery-window-warmth{0%,100%{opacity:.8}50%{opacity:1}}
+@keyframes scenery-smoke-rise{0%{opacity:0;transform:translate(0,2px)}20%{opacity:.3}75%{opacity:.15}100%{opacity:0;transform:translate(4px,-15px)}}
+@keyframes scenery-firefly-drift{0%,100%{opacity:.2;transform:translate(0,0)}40%{opacity:.9;transform:translate(3px,-6px)}70%{opacity:.45;transform:translate(-2px,-3px)}}
+@keyframes scenery-koi-swim{from{transform:translate(-6px,1px)}to{transform:translate(13px,-3px)}}
+
+@media(prefers-reduced-motion:reduce){.animated-scenery *{animation:none!important}}
 @media(max-width:700px){.greeting.illustrated-letter{padding:80px 18px 100px}.letter-paper{padding:19px 14px 16px}.letter-paper .message{font-size:11px}.letter-paper h2{font-size:21px}.theme-option>.theme-landscape{height:70px}.theme-option>.theme-option-name{font-size:8px}}

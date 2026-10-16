@@ -2,7 +2,7 @@ import type {CSSProperties} from 'react';
 import {FlowerPixels} from './pixel-art';
 
 // Seeded detail keeps the server and client render identical.
-const noise = (seed: number) => Math.abs(Math.sin(seed * 127.1 + 311.7) * 43758.5453) % 1;
+const noise = (seed: number) => Math.floor((Math.abs(Math.sin(seed * 127.1 + 311.7) * 43758.5453) % 1) * 1e6) / 1e6;
 const varieties = ['daisy', 'cosmos', 'tulip', 'lavender', 'bluebell', 'cherry', 'sunflower'];
 const breeze = (seed: number): CSSProperties => ({
   '--breeze-duration': `${4.5 + noise(seed) * 3.5}s`,

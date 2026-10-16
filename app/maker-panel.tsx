@@ -6,12 +6,17 @@ import {DecorationIcon,decorationNames} from './card-art';
 import {LetterScenery} from './letter-scenery';
 
 export const makerSteps=['Chọn hoa','Chọn nền','Trang trí','Viết lời chúc','Gửi thiệp'];
+export const makerStepDescriptions=['Một bông hoa riêng','Một góc trời nhỏ','Những chi tiết xinh','Điều muốn gửi gắm','Mang niềm vui đi'];
 const themeDetails={
  meadow:{name:'Đồng cỏ nắng',description:'Nắng vàng, đồi xanh và một lối nhỏ giữa hoa. Cho lời chúc ấm áp như một cái ôm.'},
  blossom:{name:'Vườn anh đào',description:'Tán anh đào hồng bên chiếc cầu nhỏ. Cho những điều dịu dàng bạn muốn giữ thật lâu.'},
  night:{name:'Đêm đầy sao',description:'Hồ yên ả, trăng sáng và ô cửa còn đèn. Cho một lời nhắn bình yên cuối ngày.'},
 };
 const starters=['Mẹ ơi, cảm ơn mẹ vì đã luôn là nơi bình yên nhất của con. Chúc mẹ ngày 20/10 thật nhiều niềm vui và luôn rạng rỡ như những đóa hoa!','Em cảm ơn cô vì sự tận tâm và những điều tốt đẹp cô đã gieo vào chúng em. Chúc cô ngày 20/10 thật hạnh phúc!','Chúc bạn một ngày 20/10 ngập tràn niềm vui. Hãy luôn tự tin, yêu bản thân và nở rộ theo cách riêng của mình nhé!'];
+
+export function MakerPreviewHeading({card}:{card:Card}){
+ return <><div className="maker-preview-heading"><div><span className="eyebrow">GÓC NHỎ CỦA BẠN</span><h2>Thiệp đang nở hoa.</h2></div><span className="preview-live"><span className="green-dot"/>Xem trước</span></div><div className="preview-selection"><span>{flowerNames[card.flower]}</span><span>{themeDetails[card.theme as keyof typeof themeDetails].name}</span><span>{(card.decorations||[]).length}/3 trang trí</span></div></>;
+}
 type Props={step:number;card:Card;busy:boolean;onStep:(step:number)=>void;onChange:(key:keyof Card,value:string|boolean|Decoration[])=>void;onSubmit:(event:FormEvent)=>void;onSelect:()=>void};
 
 export function MakerPanel({step,card,busy,onStep,onChange,onSubmit,onSelect}:Props){
@@ -24,8 +29,9 @@ export function MakerPanel({step,card,busy,onStep,onChange,onSubmit,onSelect}:Pr
  return <section className="panel editor maker-panel" aria-labelledby="maker-panel-title">
   <div className="panel-label">0{step} / {makerSteps[step-1].toLocaleUpperCase('vi')}</div>
   <h2 id="maker-panel-title" ref={title} tabIndex={-1}>{titles[step-1]}</h2>
+  <a className="maker-preview-jump" href="#maker-preview">Xem thiệp của bạn ↓</a>
   {step===1&&<>
-   <p className="muted">Chọn một bông hoa và khám phá câu chuyện nhỏ của nó.</p>
+   <p className="muted">{flowers.length} bông hoa, mỗi bông một câu chuyện. Chọn một đóa dành riêng cho người ấy.</p>
    <div className="flower-options" role="group" aria-label="Chọn bông hoa">
     {flowers.map(f=><button type="button" key={f} aria-pressed={card.flower===f} className={card.flower===f?'selected':''} onClick={()=>{onChange('flower',f);onSelect()}}><Flower type={f}/><span>{flowerNames[f]}</span>{card.flower===f&&<b aria-hidden="true">✓</b>}</button>)}
    </div>

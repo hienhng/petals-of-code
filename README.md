@@ -1,6 +1,6 @@
 # Petals of Code
 
-A handcrafted pixel-art greeting-card garden for LTPC — Lương Thế Vinh Tân Triều Programming Club — celebrating Vietnamese Women's Day, **20 October 2026**.
+A handcrafted pixel-art greeting-card garden for THCS&THPT Lương Thế Vinh, celebrating Vietnamese Women's Day, **20 October 2026**. The project is created by Lương Thế Vinh Tân Triều Programming Club.
 
 **This project has not been deployed.** It is prepared for your later Vercel deployment with Neon Postgres.
 
@@ -14,7 +14,7 @@ npm ci
 npm run dev
 ```
 
-Open the local URL printed by Next.js. You can explore the artwork, flower choices, themes, and live preview without a database. Saving cards, sharing links, the community garden, and moderation require Neon. The app reports this explicitly; it never pretends an unsaved card has a working sharing URL.
+Open the local URL printed by Next.js. You can explore the artwork, flower choices, themes, and live preview without a database. Saving cards, sharing links, the school garden, and moderation require Neon. The app reports this explicitly; it never pretends an unsaved card has a working sharing URL.
 
 ## Configure Neon
 
@@ -36,7 +36,7 @@ Set these **server-only** variables in `.env.local`, and later in Vercel Project
 | Variable | Purpose |
 | --- | --- |
 | `DATABASE_URL` | Your Neon Postgres connection string |
-| `ADMIN_PASSWORD` | Unique LTPC moderator password, at least 16 characters |
+| `ADMIN_PASSWORD` | Unique school garden moderator password, at least 16 characters |
 | `ADMIN_SESSION_SECRET` | Independent random secret, at least 32 characters |
 | `CARD_RATE_LIMIT` | Optional, defaults to 20 cards per hour per network identity |
 
@@ -68,11 +68,11 @@ Card URLs use the domain on which the card was created. Create final cards on th
 - Twelve flower sprites (including daisy, lily, lotus, orchid, hydrangea, peony, and cosmos), three backgrounds, live preview, Vietnamese starter messages, optional anonymous sender.
 - Three illustrated pixel landscapes fill the letter canvas: sunny stepped hills and a flower-lined path, cherry trees around a pond and bridge, and a moonlit mountain lake with a glowing cottage. Theme choices show miniature scene previews. A translucent paper panel keeps the message readable, and PNG downloads include the same scenery.
 - Five focused creator panels: flower → background → decorations → content → send. Back navigation keeps all choices. Every flower has a sourced botanical fact and a separately labeled suggested sentiment.
-- Nine combinable pixel decorations: bows, butterflies, hearts, sparkles, fireflies, petals, bees, paper cranes, and musical notes. Choose up to three; selections persist in saved cards, shared links, the community garden, and PNG exports. Bees circle the flower and turn along their route; the bow is tied higher on the stem beneath the bloom.
+- Nine combinable pixel decorations: bows, butterflies, hearts, sparkles, fireflies, petals, bees, paper cranes, and musical notes. Choose up to three; selections persist in saved cards, shared links, the school garden, and PNG exports. Bees circle the flower and turn along their route; the bow is tied higher on the stem beneath the bloom.
 - Each decoration has its own animated sprite parts: articulated butterfly wings, heart bursts, star sparks, pulsing firefly lanterns, tumbling petal faces, and unfolding bow loops. Effects use brisk timings (0.48-second butterfly flaps; most scene cycles around 2.6–4 seconds). Each letter has replay and pause controls. Reduced motion defaults to a still scene, with an explicit button to play only that card's effects. PNGs retain a complete still composition; garden thumbnails remain still for performance.
 - Seed-to-bloom reveal, quiet-by-default sound, keyboard controls, and reduced-motion support.
 - Server-persisted UUID card links, downloadable QR codes, and canvas-rendered PNG cards.
-- Opt-in community garden with approved greetings only, 24 flowers per page, and accessible message dialogs.
+- Opt-in school garden with approved greetings only, 24 flowers per page, and accessible message dialogs.
 - Users choose their garden spot by clicking, dragging, or using arrow keys on a map before public submission. Approved flowers retain those coordinates across reloads. Larger flowers appear in a free garden layout; older cards without coordinates have a stable fallback position.
 - No fabricated participation counts, seed messages, or local-storage-only sharing.
 

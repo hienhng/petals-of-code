@@ -23,7 +23,7 @@ export function Homepage({onCreate, onGarden, onButterfly}: {
       <NaturePatch className="hero-patch-right"/>
       <MeadowInsects className="hero-insects"/>
       <div className="hero-content">
-        <div className="event-tag"><span className="tiny-flower" aria-hidden="true">✿</span> LTPC · CHÀO MỪNG NGÀY 20/10</div>
+        <div className="event-tag"><span className="tiny-flower" aria-hidden="true">✿</span> THCS&THPT LƯƠNG THẾ VINH · CHÀO MỪNG NGÀY 20/10</div>
         <p className="hero-overline">a garden of little things</p>
         <h1 id="home-title">PETALS<br/>OF <span>CODE</span><i aria-hidden="true">✦</i></h1>
         <p className="hero-subtitle">Một lời chúc nhỏ.<br className="mobile-break"/> Một bông hoa nở.</p>
@@ -62,7 +62,7 @@ export function Homepage({onCreate, onGarden, onButterfly}: {
     <section className="garden-invite" aria-labelledby="garden-invite-title">
       <HangingVine className="invite-vine"/>
       <div className="invite-bouquet" aria-hidden="true"><Flower type="daisy"/><Flower type="lavender"/><Flower type="tulip"/></div>
-      <div className="invite-copy"><span className="eyebrow">VƯỜN LỜI CHÚC</span><h2 id="garden-invite-title">Một khu vườn.<br/>Thật nhiều yêu thương.</h2><p>Mỗi bông hoa là một lời chúc thật lòng từ cộng đồng LTPC.</p></div>
+      <div className="invite-copy"><span className="eyebrow">VƯỜN LỜI CHÚC</span><h2 id="garden-invite-title">Một khu vườn.<br/>Thật nhiều yêu thương.</h2><p>Mỗi bông hoa là một lời chúc thật lòng gửi đến thầy cô và học sinh THCS&THPT Lương Thế Vinh.</p></div>
       <button className="pixel-button secondary" onClick={onGarden}>Dạo một vòng nhé <span aria-hidden="true">↗</span></button>
     </section>
     <MeadowBorder/>
