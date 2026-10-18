@@ -37,11 +37,11 @@ function Wildflower({x, y, scale, type, seed}: {x: number; y: number; scale: num
   </g>;
 }
 
-function GrassTufts() {
+function GrassTufts({minY = 22, maxY = 592}: {minY?: number; maxY?: number} = {}) {
   return <g fill="#87a370" opacity=".58">
     {Array.from({length: 42}, (_, i) => {
       const x = Math.round(noise(i + 400) * 1200);
-      const y = Math.round(22 + noise(i + 510) * 570);
+      const y = Math.round(minY + noise(i + 510) * (maxY - minY));
       return <g key={i} transform={`translate(${x} ${y}) scale(${.65 + noise(i + 610) * .55})`}>
         <path className="garden-grass-blade" style={breeze(i)} d="M0 0v-12h-3v-5h3v5h3v6h3v-15h3v21h4v-10h3V0z"/>
       </g>;
@@ -83,19 +83,9 @@ export function GardenScene() {
     <path d="M579 408h41v44h-14v34h22v38h22v40h33v56H508v-51h25v-47h20v-42h26z" fill="#ecddba"/>
     <path d="M584 412h22v38h-14v39h20v36h-16v39h20v56h-62v-50h13v-44h15v-43h2z" fill="#f4e7c9"/>
     <g fill="#d5c79e" opacity=".7"><path d="M592 458h10v3h-10zm-29 46h9v3h-9zm38 32h13v3h-13zm-47 49h12v4h-12zm73 14h14v3h-14z"/></g>
-    <BlossomTree x={-42} y={174} scale={2.55}/>
-    <BlossomTree x={935} y={196} scale={2.3}/>
-    <BlossomTree x={245} y={343} scale={.7}/>
-    <BlossomTree x={831} y={347} scale={.66}/>
     <g fill="#fff0d1">
       <path d="M0 454h257v7H0zm0 25h257v7H0z"/>
       {Array.from({length: 9}, (_, i) => <path key={i} d={`M${i * 30} 442h8v66h-8z`}/>)}
-    </g>
-    <g transform="translate(864 432)">
-      <path d="M20 15h7v65h-7z" fill="#9a7c64"/><path d="M0 0h43v33H0z" fill="#9e6b7d"/>
-      <path d="M3 3h37v26H3z" fill="#eab3c1"/><path d="M7 7h28v17H7z" fill="#fff1d6"/>
-      <path d="M7 7h5v4h5v4h7v-4h6V7h5v5h-5v4h-6v4h-7v-4h-5v-4H7z" fill="#c28b8e"/>
-      <path d="M40 -9h4v25h-4zm4 0h13v9H44z" fill="#ad7289"/>
     </g>
     {/* Tiny distant flowers build depth before the larger foreground beds. */}
     <g opacity=".7">
@@ -120,7 +110,11 @@ export function GardenScene() {
     {[[420, 575, 'lavender'], [446, 587, 'daisy'], [470, 580, 'cosmos'], [491, 600, 'tulip'], [713, 580, 'daisy'], [738, 594, 'bluebell'], [765, 584, 'tulip'], [792, 608, 'cosmos']].map(([x, y, type], i) =>
       <Wildflower key={i} x={Number(x)} y={Number(y)} type={String(type)} scale={i % 3 === 0 ? 1.3 : 1.05} seed={i + 80}/>
     )}
-    <GrassTufts/>
+    <GrassTufts minY={365} maxY={610}/>
+    <BlossomTree x={-42} y={174} scale={2.55}/>
+    <BlossomTree x={935} y={196} scale={2.3}/>
+    <BlossomTree x={245} y={343} scale={.7}/>
+    <BlossomTree x={831} y={347} scale={.66}/>
     <g className="scene-petals">
       {Array.from({length: 13}, (_, i) => <g key={i} transform={`translate(${88 + noise(i + 500) * 1020} ${165 + noise(i + 600) * 310})`}>
         <g className="scene-petal" style={{'--petal-delay': `${-i * 1.73}s`, '--petal-duration': `${11 + noise(i + 77) * 7}s`} as CSSProperties}>
@@ -130,6 +124,12 @@ export function GardenScene() {
     </g>
     <g className="scene-pollen" fill="#fff5cc">
       {[[380, 468], [456, 529], [747, 490], [821, 545], [340, 572], [699, 554]].map(([x, y], i) => <rect key={i} className="scene-mote" x={x} y={y} width={i % 2 ? 2 : 3} height={i % 2 ? 2 : 3} style={{animationDelay: `${-i * 1.4}s`}}/>)}
+    </g>
+    <g transform="translate(864 432)">
+      <path d="M20 15h7v65h-7z" fill="#9a7c64"/><path d="M0 0h43v33H0z" fill="#9e6b7d"/>
+      <path d="M3 3h37v26H3z" fill="#eab3c1"/><path d="M7 7h28v17H7z" fill="#fff1d6"/>
+      <path d="M7 7h5v4h5v4h7v-4h6V7h5v5h-5v4h-6v4h-7v-4h-5v-4H7z" fill="#c28b8e"/>
+      <path d="M40 -9h4v25h-4zm4 0h13v9H44z" fill="#ad7289"/>
     </g>
   </svg>;
 }

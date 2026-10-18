@@ -26,8 +26,7 @@ export function Homepage({onCreate, onGarden, onButterfly}: {
         <div className="event-tag"><span className="tiny-flower" aria-hidden="true">✿</span> THCS&THPT LƯƠNG THẾ VINH · CHÀO MỪNG NGÀY 20/10</div>
         <p className="hero-overline">a garden of little things</p>
         <h1 id="home-title">PETALS<br/>OF <span>CODE</span><i aria-hidden="true">✦</i></h1>
-        <p className="hero-subtitle">Một lời chúc nhỏ.<br className="mobile-break"/> Một bông hoa nở.</p>
-        <p className="hero-description">Nhân ngày Phụ nữ Việt Nam 20/10, gửi một chút yêu thương<br className="desktop"/> qua những bông hoa được tạo nên từ code.</p>
+        <p className="hero-description">Nhân ngày Phụ nữ Việt Nam 20/10, LTPC gửi một chút yêu thương<br className="desktop"/> qua những bông hoa được tạo nên từ code.</p>
         <div className="hero-actions">
           <button className="pixel-button primary" onClick={onCreate}><Flower/>Tạo thiệp ngay <span aria-hidden="true">→</span></button>
           <button className="pixel-button secondary" onClick={onGarden}>Khám phá vườn hoa <span aria-hidden="true">↗</span></button>
