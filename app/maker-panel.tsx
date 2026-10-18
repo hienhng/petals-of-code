@@ -13,10 +13,6 @@ const themeDetails={
  night:{name:'Đêm đầy sao',description:'Hồ yên ả, trăng sáng và ô cửa còn đèn. Cho một lời nhắn bình yên cuối ngày.'},
 };
 const starters=['Mẹ ơi, cảm ơn mẹ vì đã luôn là nơi bình yên nhất của con. Chúc mẹ ngày 20/10 thật nhiều niềm vui và luôn rạng rỡ như những đóa hoa!','Em cảm ơn cô vì sự tận tâm và những điều tốt đẹp cô đã gieo vào chúng em. Chúc cô ngày 20/10 thật hạnh phúc!','Chúc bạn một ngày 20/10 ngập tràn niềm vui. Hãy luôn tự tin, yêu bản thân và nở rộ theo cách riêng của mình nhé!'];
-
-export function MakerPreviewHeading({card}:{card:Card}){
- return <><div className="maker-preview-heading"><div><span className="eyebrow">GÓC NHỎ CỦA BẠN</span><h2>Thiệp đang nở hoa.</h2></div><span className="preview-live"><span className="green-dot"/>Xem trước</span></div><div className="preview-selection"><span>{flowerNames[card.flower]}</span><span>{themeDetails[card.theme as keyof typeof themeDetails].name}</span><span>{(card.decorations||[]).length}/3 trang trí</span></div></>;
-}
 type Props={step:number;card:Card;busy:boolean;onStep:(step:number)=>void;onChange:(key:keyof Card,value:string|boolean|Decoration[])=>void;onSubmit:(event:FormEvent)=>void;onSelect:()=>void};
 
 export function MakerPanel({step,card,busy,onStep,onChange,onSubmit,onSelect}:Props){

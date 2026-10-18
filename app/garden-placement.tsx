@@ -4,9 +4,10 @@ import {clampGardenPosition,gardenPosition,gardenPositionOverlapsFlower,type Gar
 import {CardArtwork} from './card-art';
 
 function previewFlowerScale(){return Math.max(.75,Math.min(165,window.innerWidth*.165)/168)}
+type PlacementFlower=Card&{status:'pending'|'approved'};
 
 export function GardenPlacement({card,value,onChange,onOverlapChange}:{card:Card;value:GardenPosition|null;onChange:(position:GardenPosition)=>void;onOverlapChange:(overlapping:boolean|null)=>void}){
- const[neighbors,setNeighbors]=useState<Card[]>([]),[loadState,setLoadState]=useState('loading'),[placementNotice,setPlacementNotice]=useState('');
+ const[neighbors,setNeighbors]=useState<PlacementFlower[]>([]),[loadState,setLoadState]=useState('loading'),[placementNotice,setPlacementNotice]=useState('');
  const[flowerScale,setFlowerScale]=useState(1);
  const map=useRef<HTMLButtonElement>(null);
  useEffect(()=>{
@@ -17,10 +18,10 @@ export function GardenPlacement({card,value,onChange,onOverlapChange}:{card:Card
  },[]);
  useEffect(()=>{
   const controller=new AbortController();
-  fetch('/api/cards',{signal:controller.signal}).then(async response=>{
+  fetch('/api/cards?placement=1',{signal:controller.signal}).then(async response=>{
    if(!response.ok)throw Error();
    const data=await response.json();
-   setNeighbors(data.cards);setLoadState('ready');
+   setNeighbors(data.cards as PlacementFlower[]);setLoadState('ready');
   }).catch(()=>{if(!controller.signal.aborted)setLoadState('error')});
   return()=>controller.abort();
  },[]);
@@ -51,7 +52,7 @@ export function GardenPlacement({card,value,onChange,onOverlapChange}:{card:Card
   <p id="placement-help">Chạm vào bãi cỏ để đặt hoa. Kéo để đổi chỗ, hoặc dùng phím mũi tên khi chọn bản đồ.</p>
   <button ref={map} type="button" className="plant-map" aria-label="Chọn vị trí trồng hoa trong vườn" aria-describedby="placement-help placement-status" onKeyDown={move} onPointerDown={event=>{if(event.button!==0)return;event.currentTarget.setPointerCapture(event.pointerId);place(event)}} onPointerMove={event=>{if(event.currentTarget.hasPointerCapture(event.pointerId))place(event)}} onPointerUp={event=>{if(event.currentTarget.hasPointerCapture(event.pointerId))event.currentTarget.releasePointerCapture(event.pointerId)}}>
    <span className="map-sky"/>
-   {neighbors.map(neighbor=>{const spot=gardenPosition(neighbor);return <span key={neighbor.id} className="plant-marker neighbor-marker" style={{left:`${spot.x}%`,top:`${spot.y}%`}}><CardArtwork flower={neighbor.flower} decorations={neighbor.decorations} small/></span>})}
+   {neighbors.map(neighbor=>{const spot=gardenPosition(neighbor);return <span key={neighbor.id} className={`plant-marker neighbor-marker ${neighbor.status==='pending'?'pending-marker':''}`} style={{left:`${spot.x}%`,top:`${spot.y}%`}}><CardArtwork flower={neighbor.flower} decorations={neighbor.decorations} small/></span>})}
    {value?<span className="plant-marker chosen-marker" style={{left:`${value.x}%`,top:`${value.y}%`}}><CardArtwork flower={card.flower} decorations={card.decorations} small/><span className="chosen-label">Hoa của bạn</span></span>:<span className="map-prompt">✿ Chạm để gieo một bông hoa</span>}
   </button>
   <p className="placement-status" id="placement-status" aria-live="polite">{placementNotice|| (value?`Đã chọn vị trí · ngang ${value.x}%, dọc ${value.y}%`:'Chưa chọn vị trí trồng hoa.')}</p>

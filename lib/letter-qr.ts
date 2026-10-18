@@ -8,10 +8,10 @@ const palettes={
 };
 
 /** Plain, theme-colored QR for embedding in the letter. */
-export async function createLetterQRCode(card:Card,shareUrl:string,size=600):Promise<HTMLCanvasElement>{
+export async function createLetterQRCode(card:Card,shareUrl:string,size=600,transparentBackground=false):Promise<HTMLCanvasElement>{
  const palette=palettes[card.theme as keyof typeof palettes]||palettes.meadow;
  const canvas=document.createElement('canvas');
- await QRCode.toCanvas(canvas,shareUrl,{width:size,margin:4,errorCorrectionLevel:'M',color:{dark:palette.ink,light:palette.paper}});
+ await QRCode.toCanvas(canvas,shareUrl,{width:size,margin:4,errorCorrectionLevel:'M',color:{dark:palette.ink,light:transparentBackground?'#00000000':palette.paper}});
  return canvas;
 }
 

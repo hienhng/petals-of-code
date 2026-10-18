@@ -27,6 +27,7 @@
 .plant-marker{position:absolute;width:16.575%;transform:translate(-50%,-100%);pointer-events:none;display:block}
 .plant-marker>.card-art{width:100%;height:auto}
 .neighbor-marker{opacity:.5}
+.pending-marker{opacity:.9;filter:drop-shadow(0 0 2px #fff8df)}
 .chosen-marker{z-index:2;filter:drop-shadow(0 2px 0 #fff7dd)}
 .chosen-label{display:block;font-size:9px;line-height:1.6;background:#fff3d9;color:#7f674a;white-space:nowrap;width:max-content;max-width:130%;padding:2px 6px;margin:0 auto;border:1px solid #b9a477}
 .map-prompt{position:absolute;left:10%;right:10%;top:48%;font-size:11px;color:#6d825c;background:#f7f4decc;padding:10px}

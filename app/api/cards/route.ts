@@ -15,6 +15,12 @@ export async function GET(req:Request){try{
   if(!rows.length)throw new ApiError('Không tìm thấy thiệp.',404);
   return json({card:rows[0]});
  }
+ if(new URL(req.url).searchParams.has('placement')){
+  const rows=await sql.query(`SELECT id,flower,decorations,status,garden_x AS "gardenX",garden_y AS "gardenY"
+   FROM cards WHERE status IN ('pending','approved') AND public_opt_in
+   ORDER BY created_at DESC,id DESC`);
+  return json({cards:rows});
+ }
  const rows=await sql.query(`SELECT id,flower,theme,decorations,recipient,message,
    CASE WHEN share_sender AND NOT anonymous THEN sender ELSE '' END AS sender,
    anonymous,share_sender AS "shareSender",garden_x AS "gardenX",garden_y AS "gardenY" FROM cards WHERE status='approved' AND public_opt_in

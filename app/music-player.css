@@ -115,8 +115,8 @@
 .music-now p { font-size: 10px; margin: 0; }
 .music-display-bottom { display: flex; justify-content: space-between; align-items: end; padding-top: 5px; }
 .music-display-bottom > span:last-child { font: bold 8px 'Courier New', monospace; letter-spacing: 1px; }
-.music-levels { display: inline-flex; align-items: end; gap: 2px; height: 15px; }
-.music-levels i { width: 4px; height: 3px; background: #74865b; }
+.music-levels { display: flex; align-items: end; gap: clamp(1px, .5vw, 2px); width: 100%; min-width: 0; height: 15px; }
+.music-levels i { flex: 1 1 0; min-width: 1px; height: 3px; background: #74865b; }
 .music-dock[data-playing=true] .music-levels i { height: 12px; animation: music-meter .9s steps(3, end) infinite alternate; animation-delay: calc(var(--bar) * -.13s); }
 .music-dock[data-playing=true] .music-levels i:nth-child(3n + 1) { height: 7px; }
 .music-dock[data-playing=true] .music-levels i:nth-child(3n + 2) { height: 10px; }

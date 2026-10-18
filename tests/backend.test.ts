@@ -26,9 +26,14 @@ describe('saved cards and privacy',()=>{
   const chosen={gardenX:37.4,gardenY:82.1};
   expect((await cards.PATCH(request('/api/cards','PATCH',{id:c.card.id,editToken:c.editToken,shareSender:false,...chosen}))).status).toBe(200);
   expect((await (await cards.GET(request('/api/cards'))).json()).cards).toEqual([]);
+  const placement=await (await cards.GET(request('/api/cards?placement=1'))).json();
+  expect(placement.cards).toHaveLength(1);
+  expect(placement.cards[0]).toMatchObject({...chosen,id:c.card.id,flower:valid.flower,decorations:[],status:'pending'});
+  expect(placement.cards[0]).not.toHaveProperty('message');
   await admin.POST(request('/api/admin','POST',{id:c.card.id,status:'approved'},auth()));
   const garden=await (await cards.GET(request('/api/cards'))).json();
   expect(garden.cards[0]).toMatchObject({...chosen,id:c.card.id});
+  expect((await (await cards.GET(request('/api/cards?placement=1'))).json()).cards[0].status).toBe('approved');
   expect((await cards.PATCH(request('/api/cards','PATCH',{id:c.card.id,editToken:c.editToken,shareSender:false,gardenX:60,gardenY:60}))).status).toBe(403);
   expect((await (await cards.GET(request('/api/cards'))).json()).cards[0]).toMatchObject(chosen);
  });

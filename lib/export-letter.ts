@@ -76,9 +76,7 @@ export async function createLetterPNG(card:Card,container:HTMLElement,shareUrl:s
  context.font='26px "Be Vietnam Pro"';sender.forEach((line,i)=>context.fillText(line,540,signatureTop+48+i*37));
  context.strokeStyle='#c2b2b8';context.lineWidth=2;context.setLineDash([7,7]);
  context.beginPath();context.moveTo(100,canvas.height-575);context.lineTo(980,canvas.height-575);context.stroke();context.setLineDash([]);
- const qrCanvas=await createLetterQRCode(card,shareUrl);
- context.drawImage(qrCanvas,420,canvas.height-565,240,240);
- context.fillStyle='#917783';
- context.font='13px "Press Start 2P"';context.fillText('PETALS OF CODE',540,canvas.height-268);
+ const qrCanvas=await createLetterQRCode(card,shareUrl,600,true);
+ context.drawImage(qrCanvas,450,canvas.height-490,180,180);
  return canvas.toDataURL('image/png');
 }
