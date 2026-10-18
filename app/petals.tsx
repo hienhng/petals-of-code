@@ -28,7 +28,7 @@ function CardPreview({card,id}:{card:Card;id?:string}){
  </article>;
 }
 export default function Petals(){
- const[view,setView]=useState('home'),[step,setStep]=useState(1),[card,setCard]=useState<Card>(blank),[saved,setSaved]=useState<Card|null>(null),[token,setToken]=useState(''),[busy,setBusy]=useState(false),[bloom,setBloom]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[sound,setSound]=useState(false),[submitted,setSubmitted]=useState(false),[consent,setConsent]=useState(true),[shareSender,setShareSender]=useState(false),[garden,setGarden]=useState<Card[]>([]),[loading,setLoading]=useState(false),[selected,setSelected]=useState<Card|null>(null),[qr,setQr]=useState(''),[png,setPng]=useState('');
+ const[view,setView]=useState('home'),[step,setStep]=useState(1),[card,setCard]=useState<Card>(blank),[saved,setSaved]=useState<Card|null>(null),[token,setToken]=useState(''),[busy,setBusy]=useState(false),[bloom,setBloom]=useState(false),[error,setError]=useState(''),[notice,setNotice]=useState(''),[sound,setSound]=useState(false),[submitted,setSubmitted]=useState(false),[consent,setConsent]=useState(true),[shareSender,setShareSender]=useState(true),[garden,setGarden]=useState<Card[]>([]),[loading,setLoading]=useState(false),[selected,setSelected]=useState<Card|null>(null),[qr,setQr]=useState(''),[png,setPng]=useState('');
  const[plantPosition,setPlantPosition]=useState<GardenPosition|null>(null),[plantOverlaps,setPlantOverlaps]=useState<boolean|null>(null);
  const dialog=useRef<HTMLDialogElement>(null),preview=useRef<HTMLDivElement>(null),audio=useRef<AudioContext|null>(null);
  function toggleSound(){if(sound){setSound(false);return}try{audio.current??=new AudioContext();void audio.current.resume().catch(()=>setSound(false));setSound(true)}catch{setSound(false)}}
@@ -38,7 +38,7 @@ export default function Petals(){
   if(window.confirm('Bông hoa chưa được gửi vào vườn. Thiệp sẽ vẫn được lưu riêng tư và không hiển thị công khai. Bạn có chắc muốn rời trang không?'))action();
  }
  function clearMakerDraft(){
-  setCard(blank);setSaved(null);setToken('');setStep(1);setSubmitted(false);setConsent(true);setShareSender(false);
+  setCard(blank);setSaved(null);setToken('');setStep(1);setSubmitted(false);setConsent(true);setShareSender(true);
   setPlantPosition(null);setPlantOverlaps(null);setQr('');setPng('');setBloom(false);
  }
  function navigate(v:string){if(view==='maker'&&v!=='maker')clearMakerDraft();if(location.search)history.replaceState(null,'','/');ping();setView(v);setError('');setNotice('');window.scrollTo({top:0,behavior:'instant'});}
