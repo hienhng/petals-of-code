@@ -4,6 +4,7 @@ import {validGardenPosition} from '../../../lib/garden-position';
 import {ApiError,database,failure,isUuid,json,pageOffset,rateLimit,readBody,requireOrigin,sha} from '../../../lib/server';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
+const gardenPageSize=10;
 
 export async function GET(req:Request){try{
  const sql=database(),id=new URL(req.url).searchParams.get('id');
@@ -21,11 +22,18 @@ export async function GET(req:Request){try{
    ORDER BY created_at DESC,id DESC`);
   return json({cards:rows});
  }
+ const query=new URL(req.url).searchParams;
+ let page=Math.floor(pageOffset(req)/gardenPageSize);
+ if(query.has('active')||!query.has('offset')){
+  const counts=await sql.query(`SELECT COUNT(*)::int AS count FROM cards WHERE status='approved' AND public_opt_in`);
+  page=Math.floor(Number(counts[0].count)/gardenPageSize);
+ }
+ const offset=page*gardenPageSize;
  const rows=await sql.query(`SELECT id,flower,theme,decorations,recipient,message,
    CASE WHEN share_sender AND NOT anonymous THEN sender ELSE '' END AS sender,
    anonymous,share_sender AS "shareSender",garden_x AS "gardenX",garden_y AS "gardenY" FROM cards WHERE status='approved' AND public_opt_in
-   ORDER BY created_at DESC,id DESC LIMIT 25 OFFSET $1`,[pageOffset(req)]);
- return json({cards:rows.slice(0,24),hasMore:rows.length>24});
+   ORDER BY created_at ASC,id ASC LIMIT $2 OFFSET $1`,[offset,gardenPageSize+1]);
+ return json({cards:rows.slice(0,gardenPageSize),hasMore:rows.length>gardenPageSize,page});
 }catch(e){return failure(e)}}
 
 export async function POST(req:Request){try{
