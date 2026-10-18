@@ -198,9 +198,9 @@ export function CardArtwork({flower,decorations=[],small=false,animationPaused=f
   <g className="flower-aura" opacity="0" style={{transformBox:'fill-box',transformOrigin:'center'}}>
    <path d="M78 16h4v6h-4zm0 61h4v6h-4zM48 46h6v4h-6zm58 0h6v4h-6zM57 23h4v4h-4zm43 43h4v4h-4zM57 66h4v4h-4zm43-43h4v4h-4z" fill="#d8b775"/>
   </g>
-  <g className="garden-flower-main" transform="translate(55 24) scale(1.2)"><FlowerPixels type={flower}/></g>
-  {/* Tie the knot just below the bloom: x=55 + 16.5*1.2, y=24 + 28*1.2.
+  <g className="garden-flower-main" transform="translate(55 24) scale(1.5)"><FlowerPixels type={flower}/></g>
+  {/* Tie the knot just below the bloom: x=55 + 16.5*1.5, y=24 + 28*1.5.
       Keep this anchor outside the animated loops and tails. */}
-  {decorations.includes('ribbon')&&<g data-decoration="ribbon" transform="translate(81.4 68.8)"><g transform="scale(1.3) translate(-6.5 -4)"><Ribbon/></g></g>}
+  {decorations.includes('ribbon')&&<g data-decoration="ribbon" transform="translate(79.75 66)"><g transform="scale(1.3) translate(-6.5 -4)"><Ribbon/></g></g>}
  </svg>;
 }

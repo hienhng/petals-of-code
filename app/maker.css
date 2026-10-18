@@ -23,6 +23,8 @@
 .maker>.bloom-stage{grid-column:2;grid-row:2}
 .maker .maker-panel{min-width:0;padding:28px;background:#fffdf7;border:1px solid #ded4c9;box-shadow:0 4px 0 #eee5d7;border-radius:0}
 .maker-panel h2:focus{outline:none}
+.maker .result-columns h2:focus{outline:none}
+.maker .result-columns .garden-step{order:-1}
 .maker-preview-jump,.maker-editor-jump{display:none}
 .maker .maker-panel .panel-label{display:inline-flex;align-items:center;min-height:26px;padding:4px 9px;margin:0 0 17px;border:1px solid #e1e4d4;background:#f1f3e7;border-radius:0;font-size:8px;letter-spacing:1.2px;color:#83916e}
 .maker .maker-panel h2{font-size:23px;letter-spacing:-.6px;line-height:1.5;margin-bottom:10px}

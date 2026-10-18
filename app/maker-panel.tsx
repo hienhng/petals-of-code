@@ -5,8 +5,8 @@ import {Flower,flowerNames} from './pixel-art';
 import {DecorationIcon,decorationNames} from './card-art';
 import {LetterScenery} from './letter-scenery';
 
-export const makerSteps=['Chọn hoa','Chọn nền','Trang trí','Viết lời chúc','Gửi thiệp'];
-export const makerStepDescriptions=['Một bông hoa riêng','Một góc trời nhỏ','Những chi tiết xinh','Điều muốn gửi gắm','Mang niềm vui đi'];
+export const makerSteps=['Chọn hoa','Chọn nền','Trang trí','Viết lời chúc','Trồng vào vườn','Gửi thiệp'];
+export const makerStepDescriptions=['Một bông hoa riêng','Một góc trời nhỏ','Những chi tiết xinh','Điều muốn gửi gắm','Góp hoa cho khu vườn','Mang niềm vui đi'];
 const themeDetails={
  meadow:{name:'Đồng cỏ nắng',description:'Nắng vàng, đồi xanh và một lối nhỏ giữa hoa. Cho lời chúc ấm áp như một cái ôm.'},
  blossom:{name:'Vườn anh đào',description:'Tán anh đào hồng bên chiếc cầu nhỏ. Cho những điều dịu dàng bạn muốn giữ thật lâu.'},
@@ -59,7 +59,7 @@ export function MakerPanel({step,card,busy,onStep,onChange,onSubmit,onSelect}:Pr
    <fieldset className="inspiration"><legend>Một chút cảm hứng</legend>{['Gửi mẹ','Gửi cô','Gửi bạn'].map((s,i)=><button key={s} type="button" onClick={()=>onChange('message',starters[i])}>{s} +</button>)}</fieldset>
    <label>Người gửi<input required={!card.anonymous} disabled={card.anonymous} maxLength={40} value={card.sender} onChange={e=>onChange('sender',e.target.value)} placeholder="Tên hoặc biệt danh của bạn"/></label>
    <label className="checkbox"><input type="checkbox" checked={card.anonymous} onChange={e=>onChange('anonymous',e.target.checked)}/>Gửi ẩn danh, giữ lại một chút bí mật</label>
-   <div className="form-actions"><button type="button" className="text-link" disabled={busy} onClick={()=>onStep(3)}>← Quay lại trang trí</button><button type="submit" disabled={busy} className="pixel-button primary">{busy?'Đang gieo yêu thương…':'Hoàn tất & gửi thiệp ✿'}</button></div>
+   <div className="form-actions"><button type="button" className="text-link" disabled={busy} onClick={()=>onStep(3)}>← Quay lại trang trí</button><button type="submit" disabled={busy} className="pixel-button primary">{busy?'Đang lưu thiệp…':'Tiếp tục đến khu vườn →'}</button></div>
    <p className="privacy-note">Thiệp được lưu riêng tư. Chỉ người có đường dẫn mới đọc được nội dung; thiệp không tự xuất hiện trong vườn.</p>
   </form>:<div className="form-actions step-actions">{step>1&&<button type="button" className="text-link" onClick={()=>onStep(step-1)}>← Quay lại</button>}<button type="button" className="pixel-button primary" onClick={()=>onStep(step+1)}>{nextLabels[step-1]}</button></div>}
  </section>;
