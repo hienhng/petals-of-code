@@ -27,7 +27,7 @@ export function MakerPanel({step,card,busy,onStep,onChange,onSubmit,onSelect}:Pr
  const titles=['Bạn muốn gửi tặng hoa gì?','Một góc trời cho lời chúc.','Thêm một chút sống động.','Gửi một người thật đặc biệt.'];
  const nextLabels=['Tiếp tục chọn nền →','Tiếp tục trang trí →','Tiếp tục viết lời chúc →'];
  return <section className="panel editor maker-panel" aria-labelledby="maker-panel-title">
-  <div className="panel-label">0{step} / {makerSteps[step-1].toLocaleUpperCase('vi')}</div>
+  <div className="panel-label"><span className="maker-step-code">0{step}</span><span>{makerSteps[step-1].toLocaleUpperCase('vi')}</span><span className="maker-window-controls" aria-hidden="true"><i/><i/><i/></span></div>
   <h2 id="maker-panel-title" ref={title} tabIndex={-1}>{titles[step-1]}</h2>
   <a className="maker-preview-jump" href="#maker-preview">Xem thiệp của bạn ↓</a>
   {step===1&&<>

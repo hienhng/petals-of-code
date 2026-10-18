@@ -4,6 +4,12 @@ A handcrafted pixel-art greeting-card garden for THCS&THPT Lương Thế Vinh, c
 
 **This project has not been deployed.** It is prepared for your later Vercel deployment with Neon Postgres.
 
+## Music player
+
+The cassette button in the bottom-right corner opens **PETALS MIX**, a fully custom retro player with Ai Ngoài Anh (VSTRA, Tyronee), Và Thế Giới Đã Mất Đi Một Người Cô Đơn (marzuz, Changg), Chăm Hoa (MONO), and Đã Lỡ Yêu Em Nhiều (JustaTee). Full MP3 files supplied by the user live in `public/audio`; playback uses the browser's audio engine and does not require Spotify. Controls include centered previous, play/pause, and next buttons, seeking with real timestamps, volume/mute, and repeat-one in the song title display. Finished tracks advance to the next song, and the last track stops unless repeat-one is enabled. Playback continues when minimized and while moving between the home page, card creator, and garden. Music starts when the visitor first clicks the cassette, or uses the player controls. Page clicks and keypresses do not start music. A dismissible invitation points to the cassette until it is opened or dismissed for the current browsing session. Cassette reels and level indicators animate only during playback and respect reduced-motion preferences.
+
+Edit the `tracks` array in `app/music-player.tsx` to replace songs and audio paths. No Spotify API key or database migration is needed. The header sound toggle controls the site's existing chime effects separately.
+
 ## Run locally
 
 Requires Node.js 22.13 or newer.

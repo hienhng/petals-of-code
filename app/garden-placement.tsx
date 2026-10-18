@@ -3,7 +3,7 @@ import type {Card} from '../lib/card-validation';
 import {clampGardenPosition,gardenPosition,gardenPositionOverlapsFlower,type GardenPosition} from '../lib/garden-position';
 import {CardArtwork} from './card-art';
 
-function previewFlowerScale(){return Math.max(1,Math.min(220,window.innerWidth*.22)/168)}
+function previewFlowerScale(){return Math.max(.75,Math.min(165,window.innerWidth*.165)/168)}
 
 export function GardenPlacement({card,value,onChange,onOverlapChange}:{card:Card;value:GardenPosition|null;onChange:(position:GardenPosition)=>void;onOverlapChange:(overlapping:boolean|null)=>void}){
  const[neighbors,setNeighbors]=useState<Card[]>([]),[loadState,setLoadState]=useState('loading'),[placementNotice,setPlacementNotice]=useState('');

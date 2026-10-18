@@ -32,10 +32,8 @@ export function Homepage({onCreate, onGarden, onButterfly}: {
           <button className="pixel-button primary" onClick={onCreate}><Flower/>Tạo thiệp ngay <span aria-hidden="true">→</span></button>
           <button className="pixel-button secondary" onClick={onGarden}>Khám phá vườn hoa <span aria-hidden="true">↗</span></button>
         </div>
-        <p className="hero-note"><span aria-hidden="true">♡</span> Một chút code. Một chút yêu thương. Một món quà của riêng bạn.</p>
       </div>
       <button className="butterfly" onClick={onButterfly} aria-label="Chạm vào bươm bướm để nhận lời nhắn"><Butterfly/></button>
-      <div className="garden-caption"><span className="green-dot"/> Khu vườn luôn có chỗ cho một lời yêu thương.</div>
       <a className="scroll-cue" href="#how">KHÁM PHÁ CÁCH GỬI HOA <span aria-hidden="true">↓</span></a>
     </section>
 

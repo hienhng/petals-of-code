@@ -1,0 +1,79 @@
+/* Shared retro scrollbars for the page and nested scrolling panels. */
+@media (forced-colors: none) {
+  /* Firefox uses the standard colors; Chromium and Safari use the bevels below. */
+  @supports not selector(::-webkit-scrollbar) {
+    * {
+      scrollbar-width: auto;
+      scrollbar-color: #a47991 #eee4d2;
+    }
+  }
+
+  ::-webkit-scrollbar {
+    width: 16px;
+    height: 16px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background-color: #eee4d2;
+    background-image: conic-gradient(#d5c5b5 25%, transparent 0 50%, #d5c5b5 0 75%, transparent 0);
+    background-size: 4px 4px;
+    border: 1px solid #bba2ad;
+    box-shadow: inset 1px 1px 0 #d2bfa9;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    min-width: 32px;
+    min-height: 32px;
+    background: #e8a6b7;
+    border: 1px solid #8c6c79;
+    border-radius: 0;
+    box-shadow: inset 2px 2px 0 #ffe2e9, inset -2px -2px 0 #b9819b;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #efb9c7;
+  }
+
+  ::-webkit-scrollbar-thumb:active {
+    background: #d995ab;
+    box-shadow: inset 2px 2px 0 #b9819b, inset -2px -2px 0 #f9dbe3;
+  }
+
+  ::-webkit-scrollbar-button:single-button {
+    display: block;
+    width: 16px;
+    height: 16px;
+    background-color: #f3e7ce;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 7px 7px;
+    border: 1px solid #8c6c79;
+    box-shadow: inset 1px 1px 0 #fff9ed, inset -1px -1px 0 #c5ac96;
+  }
+
+  ::-webkit-scrollbar-button:single-button:vertical:decrement {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 7' shape-rendering='crispEdges'%3E%3Cpath fill='%23544652' d='M3 1h1v1H3zM2 2h3v1H2zM1 3h5v1H1zM0 4h7v1H0z'/%3E%3C/svg%3E");
+  }
+
+  ::-webkit-scrollbar-button:single-button:vertical:increment {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 7' shape-rendering='crispEdges'%3E%3Cpath fill='%23544652' d='M0 2h7v1H0zM1 3h5v1H1zM2 4h3v1H2zM3 5h1v1H3z'/%3E%3C/svg%3E");
+  }
+
+  ::-webkit-scrollbar-button:single-button:horizontal:decrement {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 7' shape-rendering='crispEdges'%3E%3Cpath fill='%23544652' d='M1 3h1v1H1zM2 2h1v3H2zM3 1h1v5H3zM4 0h1v7H4z'/%3E%3C/svg%3E");
+  }
+
+  ::-webkit-scrollbar-button:single-button:horizontal:increment {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 7 7' shape-rendering='crispEdges'%3E%3Cpath fill='%23544652' d='M2 0h1v7H2zM3 1h1v5H3zM4 2h1v3H4zM5 3h1v1H5z'/%3E%3C/svg%3E");
+  }
+
+  ::-webkit-scrollbar-button:single-button:active {
+    background-color: #e8d5be;
+    box-shadow: inset 1px 1px 0 #c5ac96;
+  }
+
+  ::-webkit-scrollbar-corner {
+    background: #eee4d2;
+    border: 1px solid #bba2ad;
+  }
+}

@@ -1,3 +1,4 @@
+import {createLetterQRCode} from './letter-qr';
 import type {Card} from './card-validation';
 
 function textLines(context:CanvasRenderingContext2D,text:string,maxWidth:number):string[]{
@@ -31,7 +32,7 @@ async function paintSVG(context:CanvasRenderingContext2D,source:SVGElement,x:num
  }finally{URL.revokeObjectURL(url)}
 }
 
-export async function createLetterPNG(card:Card,container:HTMLElement):Promise<string>{
+export async function createLetterPNG(card:Card,container:HTMLElement,shareUrl:string):Promise<string>{
  await document.fonts.load('27px "Be Vietnam Pro"');
  await document.fonts.load('16px "Press Start 2P"');
  await document.fonts.ready;
@@ -46,7 +47,8 @@ export async function createLetterPNG(card:Card,container:HTMLElement):Promise<s
  const nameHeight=Math.max(1,recipient.length)*42;
  const artTop=326+Math.max(0,nameHeight-42);
  const messageTop=artTop+325;
- canvas.height=Math.max(1510,messageTop+message.length*43+sender.length*37+540);
+ // Reserve a footer inside the paper for the shared letter's scannable QR.
+ canvas.height=Math.max(1750,messageTop+message.length*43+sender.length*37+780);
  context.imageSmoothingEnabled=false;
  const scenery=container.querySelector<SVGElement>('.letter-scenery');
  const flower=container.querySelector<SVGElement>('.card-art');
@@ -69,11 +71,14 @@ export async function createLetterPNG(card:Card,container:HTMLElement):Promise<s
  await paintSVG(context,flower,284,artTop,512,358);
  context.font='27px "Be Vietnam Pro"';
  message.forEach((line,i)=>context.fillText(line,540,messageTop+i*43));
- const signatureTop=canvas.height-450-sender.length*37;
+ const signatureTop=canvas.height-690-sender.length*37;
  context.font='24px "Be Vietnam Pro"';context.fillText('Với tất cả yêu thương,',540,signatureTop);
  context.font='26px "Be Vietnam Pro"';sender.forEach((line,i)=>context.fillText(line,540,signatureTop+48+i*37));
  context.strokeStyle='#c2b2b8';context.lineWidth=2;context.setLineDash([7,7]);
- context.beginPath();context.moveTo(100,canvas.height-335);context.lineTo(980,canvas.height-335);context.stroke();context.setLineDash([]);
- context.fillStyle='#917783';context.font='13px "Press Start 2P"';context.fillText('PETALS OF CODE',540,canvas.height-297);
+ context.beginPath();context.moveTo(100,canvas.height-575);context.lineTo(980,canvas.height-575);context.stroke();context.setLineDash([]);
+ const qrCanvas=await createLetterQRCode(card,shareUrl);
+ context.drawImage(qrCanvas,420,canvas.height-565,240,240);
+ context.fillStyle='#917783';
+ context.font='13px "Press Start 2P"';context.fillText('PETALS OF CODE',540,canvas.height-268);
  return canvas.toDataURL('image/png');
 }

@@ -5,6 +5,8 @@ import "./decoration-animations.css";
 import "./letter-scenery.css";
 import "./maker.css";
 import "./garden-size.css";
+import "./scrollbar.css";
+import "./music-player.css";
 import '@fontsource/press-start-2p/latin-400.css';
 import '@fontsource/be-vietnam-pro/latin-400.css';
 import '@fontsource/be-vietnam-pro/vietnamese-400.css';
