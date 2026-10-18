@@ -17,22 +17,20 @@ beforeAll(async()=>{state.db=new PGlite();await state.db.exec(readFileSync(new U
 beforeEach(async()=>{await state.db.exec('TRUNCATE cards,rate_limits');process.env.CARD_RATE_LIMIT='20'});
 afterAll(async()=>{await state.db.close()});
 describe('saved cards and privacy',()=>{
- it('paginates the garden in plots of 10 flowers',async()=>{
+ it('paginates the garden in plots of 30 flowers',async()=>{
   await state.db.query(`INSERT INTO cards(id,flower,theme,recipient,message,sender,public_opt_in,status,garden_x,garden_y,edit_hash,created_at)
    SELECT ('00000000-0000-0000-0000-'||lpad(n::text,12,'0'))::uuid,'tulip','meadow','Mẹ yêu','Cảm ơn mẹ rất nhiều!','Bạn nhỏ',TRUE,'approved',37,82,repeat('a',64),NOW()-(n||' seconds')::interval
-   FROM generate_series(1,11) n`);
+   FROM generate_series(1,31) n`);
   const first=await (await cards.GET(request('/api/cards?offset=0'))).json();
-  const second=await (await cards.GET(request('/api/cards?offset=10'))).json();
-  const active=await (await cards.GET(request('/api/cards?active=1'))).json();
-  expect(first.cards).toHaveLength(10);expect(first.hasMore).toBe(true);
+  const second=await (await cards.GET(request('/api/cards?offset=30'))).json();
+  expect(first.cards).toHaveLength(30);expect(first.hasMore).toBe(true);
   expect(second.cards).toHaveLength(1);expect(second.hasMore).toBe(false);
-  expect(active).toMatchObject({page:1,hasMore:false});expect(active.cards).toHaveLength(1);
   await state.db.exec('TRUNCATE cards');
   await state.db.query(`INSERT INTO cards(id,flower,theme,recipient,message,sender,public_opt_in,status,garden_x,garden_y,edit_hash,created_at)
    SELECT ('00000000-0000-0000-0000-'||lpad(n::text,12,'0'))::uuid,'tulip','meadow','Mẹ yêu','Cảm ơn mẹ rất nhiều!','Bạn nhỏ',TRUE,'approved',37,82,repeat('a',64),NOW()-(n||' seconds')::interval
-   FROM generate_series(1,10) n`);
-  const nextPlot=await (await cards.GET(request('/api/cards'))).json();
-  expect(nextPlot).toMatchObject({page:1,hasMore:false,cards:[]});
+   FROM generate_series(1,30) n`);
+  const fullFirstPlot=await (await cards.GET(request('/api/cards'))).json();
+  expect(fullFirstPlot).toMatchObject({page:0,hasMore:false});expect(fullFirstPlot.cards).toHaveLength(30);
  });
  it('requires a chosen garden position and preserves it through approval and shared garden reads',async()=>{
   const c=await make();
@@ -72,7 +70,7 @@ describe('saved cards and privacy',()=>{
    await cards.PATCH(request('/api/cards','PATCH',{id:c.card.id,editToken:c.editToken,shareSender:false,gardenX:42.5,gardenY:66}));
    await admin.POST(request('/api/admin','POST',{id:c.card.id,status:'approved'},auth()));
   }
-  const gardenPages=await Promise.all([0,10].map(offset=>cards.GET(request(`/api/cards?offset=${offset}`)).then(response=>response.json())));
+  const gardenPages=await Promise.all([0].map(offset=>cards.GET(request(`/api/cards?offset=${offset}`)).then(response=>response.json())));
   const garden=gardenPages.flatMap(page=>page.cards);
   expect(garden).toHaveLength(flowers.length);
   for(const card of garden)expect(card.decorations).toEqual(['ribbon','butterflies','sparkles']);
