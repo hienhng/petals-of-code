@@ -4,7 +4,7 @@ import {validGardenPosition} from '../../../lib/garden-position';
 import {ApiError,database,failure,isUuid,json,pageOffset,rateLimit,readBody,requireOrigin,sha} from '../../../lib/server';
 export const runtime='nodejs';
 export const dynamic='force-dynamic';
-const gardenPageSize=30;
+const defaultGardenPageSize=20;
 
 export async function GET(req:Request){try{
  const sql=database(),id=new URL(req.url).searchParams.get('id');
@@ -22,6 +22,9 @@ export async function GET(req:Request){try{
    ORDER BY created_at DESC,id DESC`);
   return json({cards:rows});
  }
+ const query=new URL(req.url).searchParams;
+ const gardenPageSize=query.has('limit')?Number(query.get('limit')):defaultGardenPageSize;
+ if(gardenPageSize!==10&&gardenPageSize!==defaultGardenPageSize)throw new ApiError('Yêu cầu không hợp lệ.');
  const page=Math.floor(pageOffset(req)/gardenPageSize);
  const offset=page*gardenPageSize;
  const rows=await sql.query(`SELECT id,flower,theme,decorations,recipient,message,

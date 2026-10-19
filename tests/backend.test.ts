@@ -17,20 +17,27 @@ beforeAll(async()=>{state.db=new PGlite();await state.db.exec(readFileSync(new U
 beforeEach(async()=>{await state.db.exec('TRUNCATE cards,rate_limits');process.env.CARD_RATE_LIMIT='20'});
 afterAll(async()=>{await state.db.close()});
 describe('saved cards and privacy',()=>{
- it('paginates the garden in plots of 30 flowers',async()=>{
+ it('paginates the garden in plots of 20 flowers',async()=>{
   await state.db.query(`INSERT INTO cards(id,flower,theme,recipient,message,sender,public_opt_in,status,garden_x,garden_y,edit_hash,created_at)
    SELECT ('00000000-0000-0000-0000-'||lpad(n::text,12,'0'))::uuid,'tulip','meadow','Mẹ yêu','Cảm ơn mẹ rất nhiều!','Bạn nhỏ',TRUE,'approved',37,82,repeat('a',64),NOW()-(n||' seconds')::interval
-   FROM generate_series(1,31) n`);
+   FROM generate_series(1,21) n`);
   const first=await (await cards.GET(request('/api/cards?offset=0'))).json();
-  const second=await (await cards.GET(request('/api/cards?offset=30'))).json();
-  expect(first.cards).toHaveLength(30);expect(first.hasMore).toBe(true);
+  const second=await (await cards.GET(request('/api/cards?offset=20'))).json();
+  const explicitTwenty=await (await cards.GET(request('/api/cards?limit=20&offset=0'))).json();
+  const mobileFirst=await (await cards.GET(request('/api/cards?limit=10&offset=0'))).json();
+  const mobileSecond=await (await cards.GET(request('/api/cards?limit=10&offset=10'))).json();
+  expect(first.cards).toHaveLength(20);expect(first.hasMore).toBe(true);
   expect(second.cards).toHaveLength(1);expect(second.hasMore).toBe(false);
+  expect(explicitTwenty.cards).toHaveLength(20);expect(explicitTwenty.hasMore).toBe(true);
+  expect(mobileFirst.cards).toHaveLength(10);expect(mobileFirst.hasMore).toBe(true);
+  expect(mobileSecond.cards).toHaveLength(10);expect(mobileSecond.hasMore).toBe(true);
+  expect((await cards.GET(request('/api/cards?limit=11'))).status).toBe(400);
   await state.db.exec('TRUNCATE cards');
   await state.db.query(`INSERT INTO cards(id,flower,theme,recipient,message,sender,public_opt_in,status,garden_x,garden_y,edit_hash,created_at)
    SELECT ('00000000-0000-0000-0000-'||lpad(n::text,12,'0'))::uuid,'tulip','meadow','Mẹ yêu','Cảm ơn mẹ rất nhiều!','Bạn nhỏ',TRUE,'approved',37,82,repeat('a',64),NOW()-(n||' seconds')::interval
-   FROM generate_series(1,30) n`);
+   FROM generate_series(1,20) n`);
   const fullFirstPlot=await (await cards.GET(request('/api/cards'))).json();
-  expect(fullFirstPlot).toMatchObject({page:0,hasMore:false});expect(fullFirstPlot.cards).toHaveLength(30);
+  expect(fullFirstPlot).toMatchObject({page:0,hasMore:false});expect(fullFirstPlot.cards).toHaveLength(20);
  });
  it('requires a chosen garden position and preserves it through approval and shared garden reads',async()=>{
   const c=await make();
