@@ -3,7 +3,7 @@ import {renderToStaticMarkup} from 'react-dom/server';
 import {describe,it,expect} from 'vitest';
 import {MakerPanel} from '../app/maker-panel';
 import type {Card} from '../lib/card-validation';
-import {gardenPosition,clampGardenPosition,gardenPositionOverlapsFlower} from '../lib/garden-position';
+import {gardenPosition,gardenDisplayPosition,clampGardenPosition,gardenPositionOverlapsFlower} from '../lib/garden-position';
 const card:Card={flower:'tulip',theme:'meadow',recipient:'Mẹ yêu',message:'Cảm ơn mẹ thật nhiều!',sender:'Con',anonymous:false,shareSender:false,decorations:['bees','cranes','music']};
 const panel=(step:number)=>renderToStaticMarkup(createElement(MakerPanel,{step,card,busy:false,onStep:()=>{},onChange:()=>{},onSubmit:()=>{},onSelect:()=>{}}));
 describe('focused creator panels',()=>{
@@ -18,6 +18,13 @@ describe('focused creator panels',()=>{
 });
 describe('garden placement',()=>{
  it('keeps user coordinates unchanged and bounds pointer and keyboard input',()=>{expect(gardenPosition({...card,id:'saved',gardenX:37.4,gardenY:82.1})).toEqual({x:37.4,y:82.1});expect(clampGardenPosition(-10,150)).toEqual({x:12,y:94});expect(gardenPosition({...card,id:'old'})).toEqual(gardenPosition({...card,id:'old'}))});
+ it('spreads displayed flowers into separate mobile and desktop slots',()=>{
+  expect(gardenDisplayPosition(0,true)).toEqual({x:24,y:27});
+  expect(gardenDisplayPosition(1,true)).toEqual({x:70,y:27});
+  expect(gardenDisplayPosition(8,true)).toEqual({x:24,y:91});
+  expect(gardenDisplayPosition(0,false)).toEqual({x:12,y:28});
+  expect(gardenDisplayPosition(19,false)).toEqual({x:88,y:92});
+ });
  it('rejects positions too close in both coordinates',()=>{
   const neighbor={x:50,y:60};
   expect(gardenPositionOverlapsFlower({x:50,y:60},neighbor)).toBe(true);

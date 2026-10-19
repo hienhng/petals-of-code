@@ -9,6 +9,7 @@ type PlacementFlower=Card&{status:'pending'|'approved'};
 export function GardenPlacement({card,value,onChange,onOverlapChange}:{card:Card;value:GardenPosition|null;onChange:(position:GardenPosition)=>void;onOverlapChange:(overlapping:boolean|null)=>void}){
  const[neighbors,setNeighbors]=useState<PlacementFlower[]>([]),[loadState,setLoadState]=useState('loading'),[placementNotice,setPlacementNotice]=useState('');
  const[flowerScale,setFlowerScale]=useState(1);
+ const overlapScale=flowerScale*1.25;
  const map=useRef<HTMLButtonElement>(null);
  useEffect(()=>{
   const updateScale=()=>setFlowerScale(previewFlowerScale());
@@ -27,12 +28,12 @@ export function GardenPlacement({card,value,onChange,onOverlapChange}:{card:Card
  },[]);
  useEffect(()=>{
   onOverlapChange(loadState==='ready'&&value
-   ?neighbors.some(neighbor=>gardenPositionOverlapsFlower(value,gardenPosition(neighbor),flowerScale))
+   ?neighbors.some(neighbor=>gardenPositionOverlapsFlower(value,gardenPosition(neighbor),overlapScale))
    :null);
- },[loadState,neighbors,value,flowerScale,onOverlapChange]);
+ },[loadState,neighbors,value,overlapScale,onOverlapChange]);
  function placeAt(x:number,y:number){
   const position=clampGardenPosition(x,y);
-  const overlapping=loadState==='ready'&&neighbors.some(neighbor=>gardenPositionOverlapsFlower(position,gardenPosition(neighbor),flowerScale));
+  const overlapping=loadState==='ready'&&neighbors.some(neighbor=>gardenPositionOverlapsFlower(position,gardenPosition(neighbor),overlapScale));
   onChange(position);
   onOverlapChange(loadState==='ready'?overlapping:null);
   setPlacementNotice(overlapping?'Vị trí này chạm vào một bông hoa khác. Hãy chọn vị trí khác trước khi trồng.':'');

@@ -18,3 +18,11 @@ export function gardenPosition(card:Card):GardenPosition{
  let hash=0;for(const char of card.id||card.recipient)hash=(Math.imul(hash,31)+char.charCodeAt(0))>>>0;
  return {x:12+(hash%761)/10,y:25+(Math.floor(hash/761)%691)/10};
 }
+export function gardenDisplayPosition(index:number,mobile:boolean):GardenPosition{
+ const columns=mobile?2:5,rows=mobile?5:4;
+ const column=index%columns,row=Math.floor(index/columns);
+ const rowOffset=row%2===0?-1:1;
+ const x=mobile?(column===0?27:73)+rowOffset*3:16+column*17+rowOffset*4;
+ const y=mobile?27+row*16+(row%2)*4:28+row*20+(row%2)*4;
+ return {x:Math.min(gardenBounds.right,Math.max(gardenBounds.left,x)),y:Math.min(gardenBounds.bottom,Math.max(gardenBounds.top,y))};
+}

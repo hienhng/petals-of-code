@@ -49,10 +49,11 @@ export async function POST(req:Request){try{
 export async function PATCH(req:Request){try{
  requireOrigin(req);const v=await readBody(req,1000) as {id?:unknown;editToken?:unknown;shareSender?:unknown;gardenX?:unknown;gardenY?:unknown};
  if(!v||!isUuid(v.id)||typeof v.editToken!=='string'||v.editToken.length!==64||typeof v.shareSender!=='boolean')throw new ApiError('Yêu cầu không hợp lệ.');
- if(!validGardenPosition(v.gardenX,v.gardenY))throw new ApiError('Hãy chọn một vị trí trong khu vườn trước khi trồng hoa.');
+ const hasGardenPosition=Object.hasOwn(v,'gardenX')||Object.hasOwn(v,'gardenY');
+ if(hasGardenPosition&&!validGardenPosition(v.gardenX,v.gardenY))throw new ApiError('Vị trí khu vườn không hợp lệ.');
  const sql=database(),rows=await sql.query(`UPDATE cards SET public_opt_in=TRUE,status='pending',
    share_sender=CASE WHEN anonymous THEN FALSE ELSE $1 END,garden_x=$4,garden_y=$5
-   WHERE id=$2 AND edit_hash=$3 AND status='private' RETURNING id`,[v.shareSender,v.id,sha(v.editToken),v.gardenX,v.gardenY]);
+   WHERE id=$2 AND edit_hash=$3 AND status='private' RETURNING id`,[v.shareSender,v.id,sha(v.editToken),hasGardenPosition?v.gardenX:null,hasGardenPosition?v.gardenY:null]);
  if(!rows.length)throw new ApiError('Thiệp đã được gửi hoặc bạn không có quyền chỉnh sửa.',403);
  return json({ok:true});
 }catch(e){return failure(e)}}
