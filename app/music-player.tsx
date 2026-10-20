@@ -9,6 +9,7 @@ const tracks = [
   {id: '6GM4ZOBDcDroldUxI8GZ2B', title: 'Ai Ngoài Anh', artist: 'VSTRA, Tyronee', src: '/audio/ai-ngoai-anh.mp3'},
   {id: '6Qwl74olNi1rl65FNxG5We', title: 'Và Thế Giới Đã Mất Đi Một Người Cô Đơn', artist: 'marzuz, Changg', src: '/audio/va-the-gioi.mp3'},
   {id: 'da-lo-yeu-em-nhieu', title: 'Đã Lỡ Yêu Em Nhiều', artist: 'JustaTee', src: '/audio/da-lo-yeu-em-nhieu.mp3'},
+  {id: 'first-dance', title: 'First Dance', artist: 'Uprize', src: '/audio/first-dance.mp3'}
 ];
 
 function time(seconds: number) {
